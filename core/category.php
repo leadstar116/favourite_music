@@ -4,14 +4,8 @@ class Category{
  
     // database connection and table name
     private $conn;
-    private $table_name = "Categories";
- 
-    // object properties
-    public $id;
-    public $username;
-    public $email;
-    public $password;
- 
+    private $table_name = "categories";
+  
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
@@ -19,18 +13,19 @@ class Category{
     // get all categories
     function getAll(){        
         $result = [];
-        $qry = $this->conn->prepare("SELECT id, category_name, category_popularity, created_date FROM ". $this->table_name . " ORDER BY category_popularity DESC;");
+        $qry = $this->conn->prepare("SELECT c.id, c.category_name, c.category_popularity, c.created_date, (SELECT count(*) FROM songs s WHERE s.category_id = c.id) as song_count FROM ". $this->table_name . " c ORDER BY category_popularity DESC;");
         if ($qry === false) {
             trigger_error(mysqli_error($this->conn));
         } else {
             if ($qry->execute()) {
                 $qry->store_result();
-                $qry->bind_result($id, $category_name, $category_popularity, $created_date);
+                $qry->bind_result($id, $category_name, $category_popularity, $created_date, $songs_count);
                 while($qry->fetch()) {
                     $result[$id] = [
                         'category_name' => $category_name,
                         'category_popularity' => $category_popularity,
-                        'created_date' => $created_date
+                        'created_date' => $created_date,
+                        'songs_count' => $songs_count
                     ];
                 }
             } else {
