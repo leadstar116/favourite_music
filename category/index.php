@@ -5,7 +5,7 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
     }
-    
+
     include_once("../core/functions.php");
     include_once("../includes/header.php");
 
@@ -14,6 +14,7 @@
         $category_id = $_GET['id'];
     }
     $songs = getSongsByCategoryId($category_id);
+    $category = getCategoryById($category_id);
 ?>
 
 <body>
@@ -24,18 +25,65 @@
     <!-- title end -->
     <!-- main Songs section     -->
     <div class="container">
+        <div class="row shadow-box">
+            <div class="col-md-6 songs-section">
+                <div class="category-name">
+                    <span><?= $category['category_name'] ?></span>
+                </div>
+                <div>
+                    <ul id="songs_list">
+                        <?php 
+                        foreach($songs as $id => $song) {                             
+                        ?>
+                            <li attr-id="<?= $id ?>"><?= substr($song['song_name'], 0, -4) ?></li>
+                        <?php
+                        }    
+                        ?>
+                    </ul>                    
+                </div>
+                <div class="add-favorite">
+                    <a id="add-favorite-btn">Add To Favorite</a>
+                </div>
+            </div>
+            <div class="col-md-6 favorite-section">
+                <div class="favorite-name">
+                    <span>My Favorites</span>
+                </div>
+                <div>
+                    <ul id="favorite_songs_list">
+                        
+                    </ul>                    
+                </div>
+                <div class="remove-favorite">
+                    <a id="remove-favorite-btn">Remove From Favorite</a>
+                </div>                
+            </div>        
+        </div>
         <div class="row">
-        <?php 
-            foreach($songs as $id => $song) {
-                echo $song['song_name'] . '<br/>';
-            ?>
-                
-            <?php
-            }    
-        ?>
+            <div class="col-md-12 submit-mail">
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </div>
         </div>
     </div>
     <!-- main category section end -->
+    <div id="removeModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Please confirm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to remove these songs from favorites?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="modal-btn-yes" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <?php

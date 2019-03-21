@@ -44,7 +44,6 @@ class Category{
         if ($qry === false) {
             trigger_error(mysqli_error($this->conn));
         } else {
-            $qry->bind_param('i', $id);
             if ($qry->execute()) {
                 $qry->store_result();
                 $qry->bind_result($category_name, $category_popularity, $created_date);

@@ -21,6 +21,11 @@ function getAllCategories() {
     return $category_db->getAll();
 }
 
+function getCategoryById($category_id) {
+    global $category_db;
+    return $category_db->getById($category_id);
+}
+
 function getSongsByCategoryId($category_id) {
     global $songs_db;
     return $songs_db->getSongsByCategoryId($category_id);

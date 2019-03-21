@@ -45,3 +45,123 @@ body {
     padding-top: 5px;
     font-size: 14px;
 }
+
+.category-name {
+    color: #fff;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.shadow-box {
+    -webkit-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+    -moz-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+    box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+}
+
+.songs-section {
+    color: #fff;    
+    background-image: url('/favorite-test/assets/music-background-image.jpg');    
+    background-position: center;
+    padding: 10px;
+}
+
+.songs-section ul {
+    column-count: 2;
+    text-decoration: none;
+}
+
+.songs-section ul li {
+    list-style: none;
+}
+
+.songs-section ul li:hover {
+    color: #0f0;
+    cursor: pointer;
+}
+
+.songs-section .add-favorite {
+    text-align: center;
+    font-size: 20px;
+}
+
+.songs-section .add-favorite a:hover {
+    color: #f00;
+    cursor: pointer;
+}
+
+.songs-section .selected {
+    color: #f9e36b;
+}
+
+.favorite-section {
+    color: #fff;    
+    background-image: url('/favorite-test/assets/music-background.png');    
+    background-position: center;
+    padding: 10px;
+}
+
+.favorite-name {
+    color: #fff;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.favorite-section ul {
+    column-count: 2;
+    text-decoration: none;
+}
+
+.favorite-section li {
+    list-style: none;
+}
+
+.favorite-section ul li:hover {
+    color: #0f0;
+    cursor: pointer;
+}
+
+.favorite-section .remove-favorite {
+    text-align: center;
+    font-size: 20px;
+}
+
+.favorite-section .remove-favorite a:hover {
+    color: #f00;
+    cursor: pointer;
+}
+
+.favorite-section .selected {
+    color: #c72a2a;
+}
+
+.submit-mail {
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .shadow-box {
+        box-shadow: none;
+    }
+    .songs-section {
+        -webkit-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+        -moz-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+        box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+    }
+    .songs-section ul {
+        column-count: 1;
+    }
+
+    .favorite-section {
+        -webkit-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+        -moz-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+        box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+    }
+    .favorite-section ul {
+        column-count: 1;
+    }
+
+    .favorite-section {
+        margin-top: 30px;
+    }
+}
