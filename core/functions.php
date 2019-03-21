@@ -1,7 +1,13 @@
 <?php
-include_once("./config/database.php");
-include_once("./core/category.php");
-include_once("./core/songs.php");
+if(file_exists("../config/database.php")) {
+    include_once("../config/database.php");
+    include_once("../core/category.php");
+    include_once("../core/songs.php");
+} else {
+    include_once($_SERVER['DOCUMENT_ROOT']."/favorite-test/config/database.php");
+    include_once($_SERVER['DOCUMENT_ROOT']."/favorite-test/core/category.php");
+    include_once($_SERVER['DOCUMENT_ROOT']."/favorite-test/core/songs.php");
+}
 
 $database = new Database();
 $db = $database->getConnection();
@@ -13,6 +19,11 @@ $songs_db = new Songs($db);
 function getAllCategories() {
     global $category_db;
     return $category_db->getAll();
+}
+
+function getSongsByCategoryId($category_id) {
+    global $songs_db;
+    return $songs_db->getSongsByCategoryId($category_id);
 }
 
 // get songs for categories in audio_bin

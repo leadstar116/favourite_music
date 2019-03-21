@@ -10,7 +10,8 @@
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="/favorite-test/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="/favorite-test/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="/favorite-test/css/style.css" rel="stylesheet">
 </head>

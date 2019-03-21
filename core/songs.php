@@ -39,11 +39,10 @@ class Songs{
     // get category by id
     function getSongsByCategoryId($category_id){
         $result = [];
-        $qry = $this->conn->prepare("SELECT id, song_name, created_date FROM ". $this->table_name ." WHERE category_id = ". $category_id ." LIMIT 1;");
+        $qry = $this->conn->prepare("SELECT id, song_name, created_date FROM ". $this->table_name ." WHERE category_id = ". $category_id .";");
         if ($qry === false) {
             trigger_error(mysqli_error($this->conn));
         } else {
-            $qry->bind_param('i', $category_id);
             if ($qry->execute()) {
                 $qry->store_result();
                 $qry->bind_result($id, $song_name, $created_date);

@@ -1,8 +1,11 @@
 <?php 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
+    $debugging = true;
+    if($debugging) {
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+    }
+    
     include_once("core/functions.php");
     include_once("includes/header.php");
 
@@ -24,10 +27,10 @@
                 <div class="col-6 col-md-4 col-lg-3" id="category-<?= $id ?>">
                     <div class="category-wrapper">
                         <div class="category-album">
-                            <a href=""><img src="/img/music-samples/<?= $category['category_name'] ?>.png" alt="" onerror="this.onerror=null;this.src='/img/music-samples/default_album.jpg';"></a>
+                            <a href="category/index.php?id=<?= $id ?>"><img src="/img/music-samples/<?= $category['category_name'] ?>.png" alt="" onerror="this.onerror=null;this.src='/img/music-samples/default_album.jpg';"></a>
                         </div>
                         <div class="category-info">
-                            <a href=""><?= $category['category_name'] ?></a>
+                            <a href="category/index.php?id=<?= $id ?>"><?= $category['category_name'] ?></a>
                             <div class="category-detailed-info row">
                                 <span class="col-6"><?= $category['category_popularity'] ?> <i class="fa fa-heart" style="color: #f00;"></i></span>
                                 <span class="col-6"><?= $category['songs_count'] ?> <i class="fa fa-music"></i></span>
