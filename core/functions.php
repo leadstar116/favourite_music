@@ -8,4 +8,9 @@ $db = $database->getConnection();
 // prepare category object
 $category_db = new Category($db);
 
+function getAllCategories() {
+    global $category_db;
+    return $category_db->getAll();
+}
+
 ?>

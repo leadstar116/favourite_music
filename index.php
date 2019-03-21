@@ -5,6 +5,8 @@
 
     include_once("core/functions.php");
     include_once("includes/header.php");
+
+    $categories = getAllCategories();    
 ?>
 
 <body>

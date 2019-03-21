@@ -16,24 +16,53 @@ class Category{
     public function __construct($db){
         $this->conn = $db;
     }
-    // signup user
-    function signup(){
-        $result = mysqli_fetch_array($this->conn->query("select addUser('".$this->username."', '". $this->email."', '". $this->password."')"));                        
-        $result = json_decode($result[0], true);
-        if($result['success']) {
-            $this->id = $result['id'];           
-        }  
-        return $result;        
-    }
-    // login user
-    function login(){        
-        $result = mysqli_fetch_array($this->conn->query("select login('".$this->email."', '".$this->password."')"));
-        $result = json_decode($result[0], true);
+    // get all categories
+    function getAll(){        
+        $result = [];
+        $qry = $this->conn->prepare("SELECT id, category_name, category_popularity, created_date FROM ". $this->table_name . " ORDER BY category_popularity DESC;");
+        if ($qry === false) {
+            trigger_error(mysqli_error($this->conn));
+        } else {
+            if ($qry->execute()) {
+                $qry->store_result();
+                $qry->bind_result($id, $category_name, $category_popularity, $created_date);
+                while($qry->fetch()) {
+                    $result[$id] = [
+                        'category_name' => $category_name,
+                        'category_popularity' => $category_popularity,
+                        'created_date' => $created_date
+                    ];
+                }
+            } else {
+                trigger_error(mysqli_error($this->conn));
+            }
+        }
+        $qry->close();
         
-        if($result['success']) {
-            $this->id = $result['id'];
-            $this->username = $result['username'];
-        }  
-        return $result;        
+        return $result;       
     }
+
+    // get category by id
+    function getById($id){
+        $result = [];
+        $qry = $this->conn->prepare("SELECT category_name, category_popularity, created_date FROM ". $this->table_name ." WHERE id = ". $id ." LIMIT 1;");
+        if ($qry === false) {
+            trigger_error(mysqli_error($this->conn));
+        } else {
+            $qry->bind_param('i', $id);
+            if ($qry->execute()) {
+                $qry->store_result();
+                $qry->bind_result($category_name, $category_popularity, $created_date);
+                $qry->fetch();         
+                $result['category_name'] = $category_name;
+                $result['category_popularity'] = $category_popularity;
+                $result['created_date'] = $created_date;
+            } else {
+                trigger_error(mysqli_error($this->conn));
+            }
+        }
+        $qry->close();
+        
+        return $result;        
+    }    
 }
