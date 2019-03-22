@@ -135,3 +135,7 @@ $(document).on('click', '#modal-btn-submit', function(){
         }
     });
 });
+
+$(document).on('click', 'add-new-song-btn', function(){
+    
+});

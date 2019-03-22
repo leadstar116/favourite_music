@@ -40,17 +40,18 @@ class Category{
     // get category by id
     function getById($id){
         $result = [];
-        $qry = $this->conn->prepare("SELECT category_name, category_popularity, created_date FROM ". $this->table_name ." WHERE id = ". $id ." LIMIT 1;");
+        $qry = $this->conn->prepare("SELECT c.category_name, c.category_popularity, c.created_date, (SELECT count(*) FROM songs s WHERE s.category_id = c.id) as song_count FROM ". $this->table_name ." c WHERE id = ". $id ." LIMIT 1;");
         if ($qry === false) {
             trigger_error(mysqli_error($this->conn));
         } else {
             if ($qry->execute()) {
                 $qry->store_result();
-                $qry->bind_result($category_name, $category_popularity, $created_date);
+                $qry->bind_result($category_name, $category_popularity, $created_date, $songs_count);
                 $qry->fetch();         
                 $result['category_name'] = $category_name;
                 $result['category_popularity'] = $category_popularity;
                 $result['created_date'] = $created_date;
+                $result['songs_count'] = $songs_count;
             } else {
                 trigger_error(mysqli_error($this->conn));
             }

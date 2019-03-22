@@ -50,10 +50,11 @@ $songs = getSongsByCategoryId($category_id);
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Category - <?= $category['category_name'] ?></h1>
-                    <span><?= $category['category_popularity'] ?> <i class="fa fa-heart" style="color: #f00;"></i></span>
-                    <span><?= $category['songs_count'] ?> <i class="fa fa-music"></i></span>
-                    <input id="add-new-category-btn" class="btn btn-primary pull-right" type="button" value="Add New">
+                    <h1 class="h2">Category - <?= $category['category_name'] ?>
+                        <span><?= $category['category_popularity'] ?> <i class="fa fa-heart" style="color: #f00;"></i></span>
+                        <span><?= $category['songs_count'] ?> <i class="fa fa-music"></i></span>
+                    </h1>
+                    <input id="add-new-song-btn" class="btn btn-primary pull-right" type="button" value="Add New Song">
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
