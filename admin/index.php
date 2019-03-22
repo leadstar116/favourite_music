@@ -10,8 +10,8 @@
         session_start(); 
     }
 
-    if(isset($_SESSION['user_id'])) {
-        include_once('categories/index.php');
+    if(isset($_SESSION['user_id'])) {        
+        header('Location: /favourite_music/admin/categories/index.php');
     } else {
         include_once('login.php');
     }

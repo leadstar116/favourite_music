@@ -18,7 +18,7 @@ $categories = getAllCategories();
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Music On-Hold Now</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="logout.php">Sign out</a>
+                <a class="nav-link" href="../logout.php">Sign out</a>
             </li>
         </ul>
     </nav>
@@ -29,13 +29,8 @@ $categories = getAllCategories();
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="">
                                 Categories
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Songs
                             </a>
                         </li>
                     </ul>
@@ -71,7 +66,7 @@ $categories = getAllCategories();
                                     <td><?= $category['songs_count'] ?></td>
                                     <td><?= $category['created_date'] ?></td>
                                     <td>
-                                        <a class="category-view-btn" href="categories/edit.php?category_id=<?= $id ?>"><i class="fa fa-eye"></i></a>
+                                        <a class="category-view-btn" href="edit.php?category_id=<?= $id ?>"><i class="fa fa-eye"></i></a>
                                         <a class="category-remove-btn"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -89,7 +84,7 @@ $categories = getAllCategories();
 </body>
 
 <?php
-include_once("../includes/footer.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/includes/footer.php");
 ?>
 <script>
     $(document).ready(function() {
