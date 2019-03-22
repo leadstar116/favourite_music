@@ -136,7 +136,32 @@ body {
 
 .submit-mail {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 20px;    
+}
+
+#submitModal .modal-content {
+    /* background-image: url('https://mdbootstrap.com/img/Photos/Others/pricing-table%20(7).jpg');     */
+    /* background-position: center; */
+    background: #000;
+    color: #fff;
+}
+
+#submitModal .submit-controls input{
+    margin-bottom: 10px;
+}
+
+#favorite_songs_list_modal {
+    padding: 0px 10px;
+    column-count: 2;
+}
+
+#favorite_songs_list_modal li{
+    list-style: none;
+}
+
+#favorite_songs_list_modal li:hover {
+    color: #0f0;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {
@@ -158,6 +183,10 @@ body {
         box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
     }
     .favorite-section ul {
+        column-count: 1;
+    }
+
+    #favorite_songs_list_modal {
         column-count: 1;
     }
 

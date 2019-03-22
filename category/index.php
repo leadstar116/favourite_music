@@ -61,11 +61,12 @@
         </div>
         <div class="row">
             <div class="col-md-12 submit-mail">
-                <input class="btn btn-primary" type="submit" value="Submit">
+                <input id="submit-mail-btn" class="btn btn-primary" type="submit" value="Submit">
             </div>
         </div>
     </div>
     <!-- main category section end -->
+    <!-- remove favorite song confirmation modal -->
     <div id="removeModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -80,6 +81,37 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" id="modal-btn-yes" data-dismiss="modal">Yes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- remove favorite song confirmation modal end            -->
+    <!-- Submit Modal -->
+    <div id="submitModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title" style="width: 100%;">Submit your favorites</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <ul id="favorite_songs_list_modal">
+                            
+                        </ul>                    
+                    </div>
+                    <div class="submit-controls" style="margin-top:10px">
+                        <input type="text" class="form-control white-text" id="submit_name" placeholder="Name">
+                        <input type="text" class="form-control white-text" id="submit_company" placeholder="Company">
+                        <input type="email" class="form-control validate white-text" id="submit_email" placeholder="Email">
+                        <input type="phone" class="form-control validate white-text" id="submit_phone" placeholder="Phone">
+                        <textarea type="text" id="submit_message" class="md-textarea form-control" rows="4" placeholder="Notes, ideas, questions..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <!-- <button type="button" class="btn btn-default" id="modal-btn-submit" data-dismiss="modal">Submit</button>                     -->
+                    <input class="btn btn-primary" type="submit" value="Submit" data-dismiss="modal" id="modal-btn-submit">
                 </div>
             </div>
         </div>
