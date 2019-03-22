@@ -87,19 +87,54 @@ class Songs{
         return $result;        
     }   
 
-    // insert new song
-    function addNewSong($category_id, $song_name) {
-        $qry = $this->conn->prepare("INSERT INTO ". $this->table_name ." SET category_id = ?, song_name = ?;");
+    // check if song is already exist in category
+    function checkSongExist($category_id, $song_name) {
+        $result = [
+            'success' => false
+        ];
+
+        $qry = $this->conn->prepare("SELECT id FROM ". $this->table_name ." WHERE category_id = ? AND song_name = ? limit 1;");
         if ($qry === false) {
             trigger_error(mysqli_error($this->conn));
         } else {
             $qry->bind_param('is', $category_id, $song_name);
             if ($qry->execute()) {
-                
+                $qry->store_result();
+                $qry->bind_result($id);
+                if($qry->fetch()) {
+                    if($id) {
+                        $result['error'] = 'Song is already exist in this category';
+                        $qry->close();
+                        return $result;
+                    }
+                }
             } else {
                 trigger_error(mysqli_error($this->conn));
             }
         }
         $qry->close();
+
+        $result['success'] = true;
+        return $result;
+    }
+
+    // insert new song
+    function addNewSong($category_id, $song_name) {
+        $result = $this->checkSongExist($category_id, $song_name);        
+        if($result['success']) {
+            $qry = $this->conn->prepare("INSERT INTO ". $this->table_name ." SET category_id = ?, song_name = ?;");
+            if ($qry === false) {
+                trigger_error(mysqli_error($this->conn));
+            } else {
+                $qry->bind_param('is', $category_id, $song_name);
+                if ($qry->execute()) {
+                    $result['success'] = true;
+                } else {
+                    trigger_error(mysqli_error($this->conn));
+                }
+            }
+            $qry->close();
+        }
+        return $result;
     }
 }

@@ -136,6 +136,42 @@ $(document).on('click', '#modal-btn-submit', function(){
     });
 });
 
-$(document).on('click', 'add-new-song-btn', function(){
-    
+$("#uploadBtn").on('change', function (event) {
+    var formdata = new FormData();
+    $("div.progress").show();
+    if($(this).prop('files').length > 0)
+    {
+        var file = $(this).prop('files')[0];
+        formdata.append("file", file);
+        formdata.append("category_id", $("#category_id").val());
+        formdata.append("category_name", $('#category_name').val());
+        formdata.append("type", 'add_new_song');
+        
+        var ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.onreadystatechange = function () {
+            if (this.readyState == 4) { // If the HTTP request has completed 
+                if (this.status == 200) { // If the HTTP response code is 200 (e.g. successful)
+                    var response = this.responseText; // Retrieve the response text    
+                    alert(response);
+                    location.reload();      
+                };
+            };
+        };
+        ajax.open("POST", "ajax_upload_new_song.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP        
+        ajax.send(formdata);
+    }
+    return false;
 });
+
+function progressHandler(event) {
+    var percent = (event.loaded / event.total) * 100;
+    $("#progressBar").css("width", Math.round(percent) + "%");
+    $("#progressBar").html(Math.round(percent) + "%");    
+}
+
+function completeHandler(event) {
+    $("#progressBar").css("width", "100%");
+    $("#progressBar").html("100%");  
+}

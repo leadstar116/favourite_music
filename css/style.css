@@ -363,3 +363,18 @@ input:focus{
     font-size: 20px;
     margin: 0 10px;
 }
+
+div.progress {
+    width: 400px;
+    border-radius: 4px;
+    margin: 12px;
+    display: none;
+}
+
+.progressStatus {
+    float: left;
+}
+.progressStatus span{
+    font-size: 14px;
+    color: #ffffff;
+}

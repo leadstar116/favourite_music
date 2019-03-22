@@ -54,7 +54,16 @@ $songs = getSongsByCategoryId($category_id);
                         <span><?= $category['category_popularity'] ?> <i class="fa fa-heart" style="color: #f00;"></i></span>
                         <span><?= $category['songs_count'] ?> <i class="fa fa-music"></i></span>
                     </h1>
-                    <input id="add-new-song-btn" class="btn btn-primary pull-right" type="button" value="Add New Song">
+                    <div>
+                        <input id="category_id" style="display:none;" value="<?= $category_id ?>">
+                        <input id="category_name" style="display:none;" value="<?= $category['category_name'] ?>">
+                        <input type="file" id="uploadBtn" class="btn btn-primary btn-add-image" style="display: none;">
+                        <label for="uploadBtn" class="btn btn-primary pull-right">Add New Song</label>   
+                        <div class="progress pull-right">
+                            <div id="progressBar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            </div>
+                        </div>                 
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">

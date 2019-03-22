@@ -34,6 +34,16 @@ function getSongsByCategoryId($category_id) {
     return $songs_db->getSongsByCategoryId($category_id);
 }
 
+function addNewSongToCategory($category_id, $song_name) {
+    global $songs_db;
+    return $songs_db->addNewSong($category_id, $song_name);
+}
+
+function checkSongExistInCategory($category_id, $song_name) {
+    global $songs_db;
+    return $songs_db->checkSongExist($category_id, $song_name);
+}
+
 function checkLogin($username, $password) {
     global $users_db;
     return $users_db->checkLogin($username, $password);
