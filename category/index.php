@@ -6,6 +6,7 @@
         error_reporting(E_ALL);
     }
 
+    $subdir = "/favorite-test";
     include_once("../core/functions.php");
     include_once("../includes/header.php");
 

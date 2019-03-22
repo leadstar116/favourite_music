@@ -4,9 +4,9 @@ if(file_exists("../config/database.php")) {
     include_once("../core/category.php");
     include_once("../core/songs.php");
 } else {
-    include_once($_SERVER['DOCUMENT_ROOT']."/favorite-test/config/database.php");
-    include_once($_SERVER['DOCUMENT_ROOT']."/favorite-test/core/category.php");
-    include_once($_SERVER['DOCUMENT_ROOT']."/favorite-test/core/songs.php");
+    include_once($_SERVER['DOCUMENT_ROOT']. $subdir ."/config/database.php");
+    include_once($_SERVER['DOCUMENT_ROOT']. $subdir ."/core/category.php");
+    include_once($_SERVER['DOCUMENT_ROOT']. $subdir ."/core/songs.php");
 }
 
 $database = new Database();
