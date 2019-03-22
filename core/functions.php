@@ -3,10 +3,12 @@ if(file_exists("../config/database.php")) {
     include_once("../config/database.php");
     include_once("../core/category.php");
     include_once("../core/songs.php");
+    include_once("../core/users.php");
 } else {
     include_once($_SERVER['DOCUMENT_ROOT']. $subdir ."/config/database.php");
     include_once($_SERVER['DOCUMENT_ROOT']. $subdir ."/core/category.php");
     include_once($_SERVER['DOCUMENT_ROOT']. $subdir ."/core/songs.php");
+    include_once($_SERVER['DOCUMENT_ROOT']. $subdir ."/core/users.php");
 }
 
 $database = new Database();
@@ -15,6 +17,7 @@ $db = $database->getConnection();
 // prepare category object
 $category_db = new Category($db);
 $songs_db = new Songs($db);
+$users_db = new Users($db);
 
 function getAllCategories() {
     global $category_db;
@@ -29,6 +32,16 @@ function getCategoryById($category_id) {
 function getSongsByCategoryId($category_id) {
     global $songs_db;
     return $songs_db->getSongsByCategoryId($category_id);
+}
+
+function checkLogin($username, $password) {
+    global $users_db;
+    return $users_db->checkLogin($username, $password);
+}
+
+function userRegister($username, $email, $password) {
+    global $users_db;
+    return $users_db->userRegister($username, $email, $password);
 }
 
 // get songs for categories in audio_bin

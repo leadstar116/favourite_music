@@ -164,6 +164,61 @@ body {
     cursor: pointer;
 }
 
+/* login and sign up page  */
+.card{
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+    
+.social_icon span{
+    font-size: 60px;
+    margin-left: 10px;
+    color: #FFC312;
+}
+    
+.social_icon span:hover{
+    color: white;
+    cursor: pointer;
+}
+    
+.card-header h3{
+    color: white;
+}
+        
+.input-group-prepend span{
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+}
+    
+input:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;    
+}
+        
+.login_btn{
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+}
+    
+.login_btn:hover{
+    color: black;
+    background-color: white;
+}
+    
+.links{
+    color: white;
+}
+    
+.links a{
+    margin-left: 4px;
+}
+
 @media only screen and (max-width: 768px) {
     .shadow-box {
         box-shadow: none;
@@ -193,4 +248,113 @@ body {
     .favorite-section {
         margin-top: 30px;
     }
+}
+
+/* dashboard css */
+.dashboard {
+    font-size: .875rem;
+    padding: 0px;
+}
+  
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+/*
+* Sidebar
+*/
+
+.dashboard .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.dashboard .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 48px; /* Height of navbar */
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.dashboard .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.dashboard .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+}
+
+.dashboard .sidebar .nav-link.active {
+    color: #007bff;
+}
+
+.dashboard .sidebar .nav-link:hover .feather,
+.dashboard .sidebar .nav-link.active .feather {
+    color: inherit;
+}
+
+.dashboard .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+/*
+* Navbar
+*/
+
+.dashboard .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.dashboard .navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+.dashboard .form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+}
+
+.dashboard .form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/*
+* Utilities
+*/
+
+.dashboard .border-top { border-top: 1px solid #e5e5e5; }
+.dashboard .border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+/* dashboard end */
+
+.category-table td a{
+    margin: 0 10px;
+    font-size: 15px;
+}
+.category-table td a:hover{
+    cursor: pointer;
+}
+.category-table a.category-remove-btn {
+    color: #f00;
 }
