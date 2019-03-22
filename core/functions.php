@@ -44,6 +44,11 @@ function checkSongExistInCategory($category_id, $song_name) {
     return $songs_db->checkSongExist($category_id, $song_name);
 }
 
+function deleteSongById($song_id) {
+    global $songs_db;
+    return $songs_db->deleteSongById($song_id);
+}
+
 function checkLogin($username, $password) {
     global $users_db;
     return $users_db->checkLogin($username, $password);

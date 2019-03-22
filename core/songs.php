@@ -137,4 +137,20 @@ class Songs{
         }
         return $result;
     }
+
+    //delete song by id
+    function deleteSongById($song_id) {
+        $qry = $this->conn->prepare("DELETE FROM ". $this->table_name ." where id=?;");
+        if ($qry === false) {
+            trigger_error(mysqli_error($this->conn));
+        } else {
+            $qry->bind_param('i', $song_id);
+            if ($qry->execute()) {
+                
+            } else {
+                trigger_error(mysqli_error($this->conn));
+            }
+        }
+        $qry->close();
+    }
 }

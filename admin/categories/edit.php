@@ -82,7 +82,7 @@ $songs = getSongsByCategoryId($category_id);
                                     <td><?= $song['downloaded_count'] ?></td>
                                     <td><?= $song['created_date'] ?></td>
                                     <td>
-                                        <a class="song-remove-btn" attr-id="<?= $id ?>"><i class="fa fa-trash"></i></a>
+                                        <a class="song-remove-btn" attr-id="<?= $id ?>" attr-name="<?= $song['song_name'] ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php
@@ -95,6 +95,28 @@ $songs = getSongsByCategoryId($category_id);
             </main>
         </div>
     </div>
+    <!-- remove song confirmation modal -->
+    <div id="removeModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Please confirm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to remove a song?</p>
+                </div>
+                <input id="song_id" style="display:none;" >
+                <input id="song_name" style="display:none;" >                        
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="remove-song-btn-yes" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- remove song confirmation modal end            -->
 </body>
 
 <?php
