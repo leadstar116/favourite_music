@@ -92,21 +92,46 @@ $(document).on('click', '#modal-btn-submit', function(){
     var favorite_songs = sessionStorage.getItem("favorite_songs");
     var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
     if(favorite_songs == undefined) {
-        favorite_songs = [];
-    } else {
-        favorite_songs = favorite_songs.split(",");
-    }
+        favorite_songs = '';
+    } 
     if(favorite_songs_name == undefined) {
-        favorite_songs_name = [];
-    } else {
-        favorite_songs_name = favorite_songs_name.split(",");
-    }
-    $('#favorite_songs_list li.selected').each(function(){
-        favorite_songs.splice($.inArray($(this).attr('attr-id'), favorite_songs),1);
-        favorite_songs_name.splice($.inArray($(this).text(), favorite_songs_name),1);
-        $(this).remove();
-        $('#favorite_songs_list_modal li[attr-id="'+ $(this).attr('attr-id') +'"]').remove();
+        favorite_songs_name = '';
+    } 
+
+    var formdata = new FormData();
+    formdata.append("name", $("#submit_name").val());
+    formdata.append("company", $("#submit_company").val());
+    formdata.append("email", $("#submit_email").val());
+    formdata.append("phone", $("#submit_phone").val());
+    formdata.append("message", $("#submit_message").val());
+    formdata.append("favorite_songs_id", favorite_songs);
+    formdata.append("favorite_songs_name", favorite_songs_name);
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        data: formdata,
+        cache: false,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+        success: function(data, textStatus, jqXHR)
+        {
+            if(typeof data.error === 'undefined')
+            {
+                // Success so call function to process the form
+                alert("Successfully sent");        
+            }
+            else
+            {
+                // Handle errors here
+                alert('ERRORS: ' + data.error);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            alert('ERRORS: ' + textStatus);
+            // STOP LOADING SPINNER
+        }
     });
-    sessionStorage.setItem("favorite_songs", favorite_songs);
-    sessionStorage.setItem("favorite_songs_name", favorite_songs_name);  
 });

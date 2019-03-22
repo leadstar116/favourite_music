@@ -60,7 +60,7 @@ body {
 
 .songs-section {
     color: #fff;    
-    background-image: url('/favorite-test/assets/music-background-image.jpg');    
+    background-image: url('/favourite_music/assets/music-background-image.jpg');    
     background-position: center;
     padding: 10px;
 }
@@ -95,7 +95,7 @@ body {
 
 .favorite-section {
     color: #fff;    
-    background-image: url('/favorite-test/assets/music-background.png');    
+    background-image: url('/favourite_music/assets/music-background.png');    
     background-position: center;
     padding: 10px;
 }
