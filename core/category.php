@@ -60,4 +60,54 @@ class Category{
         
         return $result;        
     }    
+
+    // check if category exist
+    function checkCategoryExist($category_name) {
+        $result = [
+            'success' => false
+        ];
+
+        $qry = $this->conn->prepare("SELECT id FROM ". $this->table_name ." WHERE category_name = ? limit 1;");
+        if ($qry === false) {
+            trigger_error(mysqli_error($this->conn));
+        } else {
+            $qry->bind_param('s', $category_name);
+            if ($qry->execute()) {
+                $qry->store_result();
+                $qry->bind_result($id);
+                if($qry->fetch()) {
+                    if($id) {
+                        $result['error'] = 'This category is already exist';
+                        $qry->close();
+                        return $result;
+                    }
+                }
+            } else {
+                trigger_error(mysqli_error($this->conn));
+            }
+        }
+        $qry->close();
+
+        $result['success'] = true;
+        return $result;
+    }
+    // add new category
+    function addCategory($category_name) {
+        $result = $this->checkCategoryExist($category_name);        
+        if($result['success']) {
+            $qry = $this->conn->prepare("INSERT INTO ". $this->table_name ." SET category_name = ?;");
+            if ($qry === false) {
+                trigger_error(mysqli_error($this->conn));
+            } else {
+                $qry->bind_param('s', $category_name);
+                if ($qry->execute()) {
+                    $result['success'] = true;
+                } else {
+                    trigger_error(mysqli_error($this->conn));
+                }
+            }
+            $qry->close();
+        }
+        return $result;
+    }
 }

@@ -228,3 +228,66 @@ modalConfirm(function (confirm) {
         });
     }
 });    
+
+var category_image_flag = false;
+$("#albumUploadBtn").on('change', function (event) {
+    if($(this).prop('files').length > 0)
+    { 
+        var file = $(this).prop('files')[0];
+        $("#imageSrc").attr("src", URL.createObjectURL($(this).prop('files')[0]));   
+        
+        var formdata = new FormData();
+        formdata.append("file", file);
+        formdata.append("type", 'upload_temp_image');
+        
+        var ajax = new XMLHttpRequest();        
+        ajax.onreadystatechange = function () {
+            if (this.readyState == 4) { // If the HTTP request has completed 
+                if (this.status == 200) { // If the HTTP response code is 200 (e.g. successful)
+                    category_image_flag = true;   
+                };
+            };
+        };
+        ajax.open("POST", "ajax.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP        
+        ajax.send(formdata);     
+    }
+    return false;
+});
+
+$(document).on('click', "#save-category-btn", function(){
+    var formdata = new FormData();
+    var category_name = $("#new-category-name").val();
+    formdata.append("category_name", category_name);
+    formdata.append("category_image_flag", category_image_flag);
+    formdata.append("type", 'add_category');
+    
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        data: formdata,
+        cache: false,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+        success: function(data, textStatus, jqXHR)
+        {
+            if(typeof data.error === 'undefined')
+            {
+                // Success so call function to process the form
+                alert("Successfully removed");        
+                location.reload();
+            }
+            else
+            {
+                // Handle errors here
+                alert('ERRORS: ' + data.error);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            alert('ERRORS: ' + textStatus);
+            // STOP LOADING SPINNER
+        }
+    });   
+});

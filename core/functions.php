@@ -29,6 +29,16 @@ function getCategoryById($category_id) {
     return $category_db->getById($category_id);
 }
 
+function checkCategoryExist($category_name) {
+    global $category_db;
+    return $category_db->checkCategoryExist($category_name);
+}
+
+function addCategory($category_name) {
+    global $category_db;
+    return $category_db->addCategory($category_name);
+}
+
 function getSongsByCategoryId($category_id) {
     global $songs_db;
     return $songs_db->getSongsByCategoryId($category_id);

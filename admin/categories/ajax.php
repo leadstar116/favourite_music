@@ -56,6 +56,67 @@ if($_POST['type'] == 'remove_song') {
             $data = array('error' => $check_result['error']);    
         }    
     }
+} else if($_POST['type'] == 'upload_temp_image') {
+    if($_FILES["file"]["error"] == UPLOAD_ERR_OK && $_FILES["file"]['name'] != '')
+    {          
+        $error = false;
+        $files = array();
+        
+        $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/upload/temp/';
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/upload')) {
+            mkdir($_SERVER['DOCUMENT_ROOT'].'/upload', 0777, true);
+        }
+        if (!file_exists($uploaddir)) {
+            mkdir($uploaddir, 0777, true);
+        }
+
+        foreach($_FILES as $file)
+        {
+            if(move_uploaded_file($file['tmp_name'], $uploaddir . basename('temp.png')))
+            {
+                $files[] = $uploaddir .$file['name'];
+            }
+            else
+            {
+                $error = true;
+            }
+        }
+        if($error) {
+            $data = array('error' => 'There was an error uploading your files');    
+        } else {
+            $data = array('success' => 'Temp image was successfully uploaded');  
+        }
+    }
+} else if($_POST['type'] == 'add_category') {
+    $category_name = $_POST['category_name'];
+    $category_image_flag = $_POST['category_image_flag'];
+    $check_result = checkCategoryExist($category_name);
+    if ($check_result['success']) {
+        // process file
+        $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/audio_bin/' . $category_name;
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/audio_bin')) {
+            mkdir($_SERVER['DOCUMENT_ROOT'].'/audio_bin', 0777, true);
+        }
+        if (!file_exists($uploaddir)) {
+            mkdir($uploaddir, 0777, true);
+        }
+        if($category_image_flag) {
+            $uploaddir = $_SERVER['DOCUMENT_ROOT'].'/img/music-samples';
+            if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/img')) {
+                mkdir($_SERVER['DOCUMENT_ROOT'].'/img', 0777, true);
+            }
+            if (!file_exists($uploaddir)) {
+                mkdir($uploaddir, 0777, true);
+            }
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/upload/temp/temp.png')) {
+                rename($_SERVER['DOCUMENT_ROOT'] . '/upload/temp/temp.png', $uploaddir . basename($category_name.'.png'));
+            }            
+        }
+        // add to db
+        
+    } else {
+        $data = array('error' => $check_result['error']);    
+    }
 }
 
 echo json_encode($data);

@@ -188,8 +188,7 @@ body {
     color: white;
 }
         
-.input-group-prepend span{
-    width: 50px;
+.input-group-prepend span{    
     background-color: #FFC312;
     color: black;
     border:0 !important;
