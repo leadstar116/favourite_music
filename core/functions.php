@@ -66,6 +66,11 @@ function deleteSongById($song_id) {
     return $songs_db->deleteSongById($song_id);
 }
 
+function addDownloadedCountOfSong($song_id, $count = 1) {
+    global $songs_db;
+    return $songs_db->addDownloadedCountOfSong($song_id, $count);
+}
+
 function checkLogin($username, $password) {
     global $users_db;
     return $users_db->checkLogin($username, $password);

@@ -98,6 +98,10 @@ $(document).on('click', '#modal-btn-submit', function(){
         favorite_songs_name = '';
     } 
 
+    if($("#submit_name").val() == '' || $("#submit_company").val() == '' || $("#submit_email").val() == '' || $("#submit_phone").val() == '' || $("#submit_message").val() == '') {
+        alert("Please fill up information");
+        return;        
+    }
     var formdata = new FormData();
     formdata.append("name", $("#submit_name").val());
     formdata.append("company", $("#submit_company").val());
@@ -134,6 +138,7 @@ $(document).on('click', '#modal-btn-submit', function(){
             // STOP LOADING SPINNER
         }
     });
+    $('#submitModal').modal('hide');
 });
 
 $("#uploadBtn").on('change', function (event) {

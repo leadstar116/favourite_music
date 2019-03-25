@@ -103,16 +103,16 @@
                         </ul>                    
                     </div>
                     <div class="submit-controls" style="margin-top:10px">
-                        <input type="text" class="form-control white-text" id="submit_name" placeholder="Name">
-                        <input type="text" class="form-control white-text" id="submit_company" placeholder="Company">
-                        <input type="email" class="form-control validate white-text" id="submit_email" placeholder="Email">
-                        <input type="phone" class="form-control validate white-text" id="submit_phone" placeholder="Phone">
+                        <input type="text" class="form-control white-text" id="submit_name" placeholder="Name" required="true">
+                        <input type="text" class="form-control white-text" id="submit_company" placeholder="Company" required="true">
+                        <input type="email" class="form-control validate white-text" id="submit_email" placeholder="Email" required="true">
+                        <input type="phone" class="form-control validate white-text" id="submit_phone" placeholder="Phone" required="true">
                         <textarea type="text" id="submit_message" class="md-textarea form-control" rows="4" placeholder="Notes, ideas, questions..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer text-center">
                     <!-- <button type="button" class="btn btn-default" id="modal-btn-submit" data-dismiss="modal">Submit</button>                     -->
-                    <input class="btn btn-primary" type="submit" value="Submit" data-dismiss="modal" id="modal-btn-submit">
+                    <input class="btn btn-primary" type="submit" value="Submit" id="modal-btn-submit">
                 </div>
             </div>
         </div>

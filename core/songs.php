@@ -169,4 +169,37 @@ class Songs{
         }
         $qry->close();
     }
+
+    // add downloaded count of song by id
+    function addDownloadedCountOfSong($song_id, $count) {
+        $qry = $this->conn->prepare("SELECT downloaded_count FROM ". $this->table_name ." WHERE id = ? limit 1;");
+        if ($qry === false) {
+            trigger_error(mysqli_error($this->conn));
+        } else {
+            $qry->bind_param('i', $song_id);
+            if ($qry->execute()) {
+                $qry->store_result();
+                $qry->bind_result($downloaded_count);
+                if($qry->fetch()) {
+                    $downloaded_count += $count;
+                    $qry->close();
+                    $qry = $this->conn->prepare("UPDATE ". $this->table_name ." SET downloaded_count = ? where id = ?;");
+                    if ($qry === false) {
+                        trigger_error(mysqli_error($this->conn));
+                    } else {
+                        $qry->bind_param('ii', $downloaded_count, $song_id);
+                        if ($qry->execute()) {
+                            $result['success'] = true;
+                        } else {
+                            trigger_error(mysqli_error($this->conn));
+                        }
+                    }
+                    $qry->close();
+                }
+            } else {
+                trigger_error(mysqli_error($this->conn));
+                $qry->close();
+            }
+        }
+    }
 }
