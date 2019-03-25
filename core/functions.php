@@ -29,6 +29,13 @@ function getCategoryById($category_id) {
     return $category_db->getById($category_id);
 }
 
+function removeCategory($category_id) {
+    global $category_db;
+    global $songs_db;
+    $category_db->removeCategory($category_id);
+    return $songs_db->deleteSongsByCategoryId($category_id);
+}
+
 function checkCategoryExist($category_name) {
     global $category_db;
     return $category_db->checkCategoryExist($category_name);
@@ -87,4 +94,20 @@ function loopDirectoriesAndGetSongs(){
         }
     }
 }
+
+function deleteDir($dirPath) {
+    if (! is_dir($dirPath)) {
+        throw new InvalidArgumentException("$dirPath must be a directory");
+    }
+
+    $files = scandir($dirPath);
+    foreach($files as $key =>$song_name) {
+        if($key == 0 || $key == 1) {
+            continue;
+        }
+        unlink($dirPath. '/' .$song_name);
+    }
+    rmdir($dirPath);
+}
+
 ?>

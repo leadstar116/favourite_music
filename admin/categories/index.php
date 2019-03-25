@@ -67,7 +67,7 @@ $categories = getAllCategories();
                                     <td><?= $category['created_date'] ?></td>
                                     <td>
                                         <a class="category-view-btn" href="edit.php?category_id=<?= $id ?>"><i class="fa fa-eye"></i></a>
-                                        <a class="category-remove-btn"><i class="fa fa-trash"></i></a>
+                                        <a class="category-remove-btn" attr-id="<?= $id ?>" attr-name="<?= $category['category_name'] ?>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php
@@ -81,6 +81,28 @@ $categories = getAllCategories();
             </main>
         </div>
     </div>
+    <!-- remove song confirmation modal -->
+    <div id="removeCategoryModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Please confirm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure to remove a category and all songs in it?</p>
+                </div>
+                <input id="modal_category_id" style="display:none;" >
+                <input id="modal_category_name" style="display:none;" >                        
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="remove-category-btn-yes" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- remove song confirmation modal end            -->
 </body>
 
 <?php

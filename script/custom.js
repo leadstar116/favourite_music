@@ -245,42 +245,55 @@ $("#albumUploadBtn").on('change', function (event) {
     }
     return false;
 });
-/*
-$(document).on('click', "#save-category-btn", function(){
-    var formdata = new FormData();
-    var category_name = $("#new-category-name").val();
-    formdata.append("category_name", category_name);
-    formdata.append("category_image_flag", category_image_flag);
-    formdata.append("type", 'add_category');
-    
-    $.ajax({
-        url: 'ajax.php',
-        type: 'POST',
-        data: formdata,
-        cache: false,
-        dataType: 'json',
-        processData: false, // Don't process the files
-        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-        success: function(data, textStatus, jqXHR)
-        {
-            if(typeof data.error === 'undefined')
+
+var removeModalConfirm = function (callback) {
+    $(".category-remove-btn").on("click", function () {
+        $("#modal_category_id").val($(this).attr('attr-id'));
+        $("#modal_category_name").val($(this).attr('attr-name'));
+        $("#removeCategoryModal").modal('show');
+    });
+
+    $("#remove-category-btn-yes").on("click", function () {        
+        callback(true);
+        $("#removeCategoryModal").modal('hide');
+    });
+};
+
+removeModalConfirm(function (confirm) {
+    if (confirm) {
+        var formdata = new FormData();
+        formdata.append("category_id", $("#modal_category_id").val());
+        formdata.append("category_name", $("#modal_category_name").val());
+        formdata.append("type", 'remove_category');
+        
+        $.ajax({
+            url: 'ajax.php',
+            type: 'POST',
+            data: formdata,
+            cache: false,
+            dataType: 'json',
+            processData: false, // Don't process the files
+            contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+            success: function(data, textStatus, jqXHR)
             {
-                // Success so call function to process the form
-                alert("Successfully removed");        
-                location.reload();
-            }
-            else
+                if(typeof data.error === 'undefined')
+                {
+                    // Success so call function to process the form
+                    alert("Successfully removed");        
+                    location.reload();
+                }
+                else
+                {
+                    // Handle errors here
+                    alert('ERRORS: ' + data.error);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
             {
                 // Handle errors here
-                alert('ERRORS: ' + data.error);
+                alert('ERRORS: ' + textStatus);
+                // STOP LOADING SPINNER
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            // Handle errors here
-            alert('ERRORS: ' + textStatus);
-            // STOP LOADING SPINNER
-        }
-    });   
-});
-*/
+        });   
+    }
+});    

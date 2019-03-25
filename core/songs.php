@@ -153,4 +153,20 @@ class Songs{
         }
         $qry->close();
     }
+
+    //delete songs by category id
+    function deleteSongsByCategoryId($category_id) {
+        $qry = $this->conn->prepare("DELETE FROM ". $this->table_name ." where category_id=?;");
+        if ($qry === false) {
+            trigger_error(mysqli_error($this->conn));
+        } else {
+            $qry->bind_param('i', $category_id);
+            if ($qry->execute()) {
+                
+            } else {
+                trigger_error(mysqli_error($this->conn));
+            }
+        }
+        $qry->close();
+    }
 }

@@ -91,6 +91,7 @@ class Category{
         $result['success'] = true;
         return $result;
     }
+
     // add new category
     function addCategory($category_name) {
         $result = $this->checkCategoryExist($category_name);        
@@ -109,5 +110,20 @@ class Category{
             $qry->close();
         }
         return $result;
+    }
+
+    // remove category
+    function removeCategory($category_id) {
+        $qry = $this->conn->prepare("DELETE FROM ". $this->table_name ." WHERE id = ?;");
+        if ($qry === false) {
+            trigger_error(mysqli_error($this->conn));
+        } else {
+            $qry->bind_param('i', $category_id);
+            if ($qry->execute()) {
+            } else {
+                trigger_error(mysqli_error($this->conn));
+            }
+        }
+        $qry->close();
     }
 }

@@ -115,6 +115,13 @@ if($_POST['type'] == 'remove_song') {
     } else {
         $data = array('error' => $check_result['error']);    
     }
+} else if($_POST['type'] == 'remove_category') {
+    $category_id = $_POST['category_id'];
+    $category_name = $_POST['category_name'];
+    $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/audio_bin/' . $category_name;
+    deleteDir($uploaddir);
+    removeCategory($category_id);
+    $data = array('success' => '');  
 }
 
 echo json_encode($data);
