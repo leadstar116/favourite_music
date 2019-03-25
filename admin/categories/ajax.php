@@ -111,9 +111,7 @@ if($_POST['type'] == 'remove_song') {
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/upload/temp/temp.png')) {
                 rename($_SERVER['DOCUMENT_ROOT'] . '/upload/temp/temp.png', $uploaddir . basename($category_name.'.png'));
             }            
-        }
-        // add to db
-        
+        }        
     } else {
         $data = array('error' => $check_result['error']);    
     }

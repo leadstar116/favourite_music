@@ -229,7 +229,6 @@ modalConfirm(function (confirm) {
     }
 });    
 
-var category_image_flag = false;
 $("#albumUploadBtn").on('change', function (event) {
     if($(this).prop('files').length > 0)
     { 
@@ -240,20 +239,13 @@ $("#albumUploadBtn").on('change', function (event) {
         formdata.append("file", file);
         formdata.append("type", 'upload_temp_image');
         
-        var ajax = new XMLHttpRequest();        
-        ajax.onreadystatechange = function () {
-            if (this.readyState == 4) { // If the HTTP request has completed 
-                if (this.status == 200) { // If the HTTP response code is 200 (e.g. successful)
-                    category_image_flag = true;   
-                };
-            };
-        };
+        var ajax = new XMLHttpRequest();     
         ajax.open("POST", "ajax.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP        
         ajax.send(formdata);     
     }
     return false;
 });
-
+/*
 $(document).on('click', "#save-category-btn", function(){
     var formdata = new FormData();
     var category_name = $("#new-category-name").val();
@@ -291,3 +283,4 @@ $(document).on('click', "#save-category-btn", function(){
         }
     });   
 });
+*/

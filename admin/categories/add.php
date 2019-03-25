@@ -1,15 +1,59 @@
 <?php
-$debugging = true;
-if ($debugging) {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-}
+    $debugging = true;
+    if ($debugging) {
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+    }
 
-$subdir = "/favourite_music";
-include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/core/functions.php");
-include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/includes/header.php");
+    $subdir = "/favourite_music";
+    include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/core/functions.php");
 
+    $show_error = false;
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $category_name = $_POST['new-category-name'];
+        $check_result = checkCategoryExist($category_name);
+        if ($check_result['success']) {
+            // process file
+            $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/audio_bin/' . $category_name;
+            if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/audio_bin')) {
+                mkdir($_SERVER['DOCUMENT_ROOT'].'/audio_bin', 0777, true);
+            }
+            if (!file_exists($uploaddir)) {
+                mkdir($uploaddir, 0777, true);
+            }
+            if($_POST['album']) {
+                $uploaddir = $_SERVER['DOCUMENT_ROOT'].'/img/music-samples/';
+                if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/img')) {
+                    mkdir($_SERVER['DOCUMENT_ROOT'].'/img', 0777, true);
+                }
+                if (!file_exists($uploaddir)) {
+                    mkdir($uploaddir, 0777, true);
+                }
+                if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/upload/temp/temp.png')) {
+                    rename($_SERVER['DOCUMENT_ROOT'] . '/upload/temp/temp.png', $uploaddir . basename($category_name.'.png'));
+                }       
+            }         
+            
+            $result = addCategory($category_name);
+        
+            if($result['success']) {
+                header('Location: /favourite_music/admin/');
+            } else {
+                $show_error = true;
+                if(!isset($result['error'])) {
+                    $error_message = "Error";
+                }else {
+                    $error_message = $result['error'];
+                }
+            }     
+            
+        } else {
+            $show_error = true;
+            $error_message = $check_result['error'];  
+        }        
+    }
+    include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/includes/header.php");
 ?>
 
 <body class="dashboard">
@@ -40,20 +84,25 @@ include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/includes/header.php");
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <h1 class="h2">Add New Category</h1>
                 </div>          
-                <form>       
-                    <div class="input-group mb-3">
+                <?php if($show_error) {?>
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> <?= $error_message ?>
+                    </div>
+                <?php }?>
+                <form action="" method="post">       
+                    <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon">Name</span>
                         </div>
-                        <input type="text" class="form-control" id="new-category-name" aria-describedby="basic-addon" required="true">
+                        <input type="text" class="form-control" name="new-category-name" aria-describedby="basic-addon" required="true">
                     </div>                                                                
                     
-                    <div class="col-sm-12 mb-3">                    
-                        <input type="file" id="albumUploadBtn" class="btn btn-primary btn-add-image" style="display: none;">                    
+                    <div class="col-sm-12 mb-3 form-group">                    
+                        <input type="file" id="albumUploadBtn" name="album" class="btn btn-primary btn-add-image" style="display: none;">                    
                         <label for="albumUploadBtn" class="btn btn-primary mr-3">Add album</label>                       
                         <img id="imageSrc" style="width: 200px; height: 200px;" />                    
                     </div>                
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 form-group">
                         <input id="save-category-btn" class="btn btn-primary" type="submit" value="Save">
                     </div>
                 </form>
