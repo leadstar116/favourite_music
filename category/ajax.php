@@ -52,7 +52,6 @@ if(isset($_POST)) {
 
     // send email
     $result = mail('supremedev116@gmail.com', 'Nonsensical Latin', $message);
-    echo $result;
     $data = array('success' => 'Successfully Sent');
 }
 echo json_encode($data);

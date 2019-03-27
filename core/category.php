@@ -13,7 +13,7 @@ class Category{
     // get all categories
     function getAll(){        
         $result = [];
-        $qry = $this->conn->prepare("SELECT c.id, c.category_name, c.category_popularity, c.created_date, (SELECT count(*) FROM songs s WHERE s.category_id = c.id) as song_count FROM ". $this->table_name . " c ORDER BY category_popularity DESC;");
+        $qry = $this->conn->prepare("SELECT c.id, c.category_name, (SELECT sum(s.downloaded_count) FROM songs s WHERE s.category_id = c.id) as popularity, c.created_date, (SELECT count(*) FROM songs s WHERE s.category_id = c.id) as song_count FROM ". $this->table_name . " c ORDER BY popularity DESC;");
         if ($qry === false) {
             trigger_error(mysqli_error($this->conn));
         } else {
@@ -40,7 +40,7 @@ class Category{
     // get category by id
     function getById($id){
         $result = [];
-        $qry = $this->conn->prepare("SELECT c.category_name, c.category_popularity, c.created_date, (SELECT count(*) FROM songs s WHERE s.category_id = c.id) as song_count FROM ". $this->table_name ." c WHERE id = ". $id ." LIMIT 1;");
+        $qry = $this->conn->prepare("SELECT c.category_name, (SELECT sum(s.downloaded_count) FROM songs s WHERE s.category_id = c.id) as popularity, c.created_date, (SELECT count(*) FROM songs s WHERE s.category_id = c.id) as song_count FROM ". $this->table_name ." c WHERE id = ". $id ." LIMIT 1;");
         if ($qry === false) {
             trigger_error(mysqli_error($this->conn));
         } else {
