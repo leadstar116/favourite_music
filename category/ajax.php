@@ -14,8 +14,8 @@ if(isset($_POST)) {
     $company = $_POST["company"];
     $email = $_POST["email"];
     $phone = $_POST["phone"];
-    $message = $_POST["message"];
-    $favorite_songs_name = $_POST["favorite_songs_name"];
+    $notes = $_POST["message"];
+    $fav = $_POST["favorite_songs_name"];
     $favorite_songs_id = $_POST["favorite_songs_id"];
     
     $favorite_songs_ids = explode(',', $favorite_songs_id);
@@ -23,35 +23,47 @@ if(isset($_POST)) {
     foreach($favorite_songs_ids as $id) {
         addDownloadedCountOfSong($id);
     }
-    /*
-    $to = "supremedev116@gmail.com";
-    $subject = "New Email Address for Mailing List";
-    $headers = "From: $email\n";
 
-    $message = "A visitor to your site has sent the following email address to be added to your mailing list.\n
+    //$to = $email . ",production@easyonhold.com";
+    $to = "supremedev116@gmail.com, aromaticconnect@gmail.com";
+    $subject = "Your Easy On Hold Jukebox Confirmation";
+    $body = "Thank you, " . $name . ", for selecting your favorite music from our jukebox!" . "\n";
+    $body .= "\r\n";
+    $body .= "Your favorites: "  . $fav . "\n";
+    $body .= "\r\n";
+    $body .= "Notes: " . $notes . "\n";
+    $body .= "\r\n";
+    $body .= "Submitted by: " . $name ."\n";
+    $body .= "\r\n";
+    $body .= "Company: " . $company ."\n";
+    $body .= "\r\n";
+    $body .= "Email: " . $email ."\n";
+    $body .= "\r\n";
+    $body .= "Phone: " . $phone ."\n";
+    $body .= "\r\n";
+    $body .= "Have you requested a free custom demo production yet? Visit: http://easyonhold.com/services/free-hold-message-demo/" . "\r\n";
+    $body .= "\r\n";
+    $body .= "Music on hold, when customized for your business with a friendly, professional voice track, is highly effective in reducing hang ups, keeping callers informed and improving your bottom line through better customer service." . "\r\n";
+    $body .= "\r\n";
+    $body .= "We would also like you to know about some of the legal and licensing issues associated with playing music on your business telephone system. Read about it here: http://easyonhold.com/learn/on-hold-music-licensing/How-To-Avoid-Music-Licensing-Fines/" . "\r\n";
+    $body .= "\r\n";
+    $body .= "Please contact us with any questions you may have. Our number is: 1-888-798-4653 (HOLD). We're here weekdays from 8:30am to 5:00pm Eastern Time." . "\r\n";
+    $body .= "\r\n";
+    $body .= "Thanks!";
+    $body.=' ' . "\n";
+    $body.=' ' . "\n";
+    $body.='Easy On Hold' . "\n";
+    $body.='www.easyonhold.com' . "\n";
+    $body.=' ' . "\n";
+    $body.='1-888-798-HOLD (4653)' . "\n";
+    $body.=' ' . "\n";
 
-    Email Address: $email";
 
-    $user = "$email";
-    $usersubject = "Thank You";
-    $userheaders = "From: you@youremailaddress.com\n";
+    $headers .= 'From: info@easyonhold.com' . "\r\n";
+    $headers .= 'Bcc: production@easyonhold.com, jen.fisher@easyonhold.com, tim.brown@easyonhold.com,julie.cook@easyonhold.com' . "\r\n";
 
-    $usermessage = "Thank you for subscribing to our mailing list.";
+    mail($to, $subject, $body, $headers);
 
-    $result = mail($to,$subject,$message,$headers);
-    */
-    // compose message
-    $message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
-    $message .= " Nam iaculis pede ac quam. Etiam placerat suscipit nulla.";
-    $message .= " Maecenas id mauris eget tortor facilisis egestas.";
-    $message .= " Praesent ac augue sed enim aliquam auctor. Ut dignissim ultricies est.";
-    $message .= " Pellentesque convallis tempor tortor. Nullam nec purus.";
-
-    // make sure each line doesn't exceed 70 characters
-    $message = wordwrap($message, 70);
-
-    // send email
-    $result = mail('supremedev116@gmail.com', 'Nonsensical Latin', $message, "musicrequest@easyonhold.com");
     $data = array('success' => 'Successfully Sent');
 }
 echo json_encode($data);
