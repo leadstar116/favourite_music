@@ -51,7 +51,7 @@ if(isset($_POST)) {
     $message = wordwrap($message, 70);
 
     // send email
-    $result = mail('supremedev116@gmail.com', 'Nonsensical Latin', $message);
+    $result = mail('supremedev116@gmail.com', 'Nonsensical Latin', $message, "musicrequest@easyonhold.com");
     $data = array('success' => 'Successfully Sent');
 }
 echo json_encode($data);

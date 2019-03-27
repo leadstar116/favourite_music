@@ -60,7 +60,7 @@ $songs = getSongsByCategoryId($category_id);
                         </div>                 
                     </div>
                 </div>
-                <div class="row">
+                <div class="row">                    
                     <div class="col-sm-12">
                         <table class="table use-dataTable category-table">
                             <thead class="thead-dark">
