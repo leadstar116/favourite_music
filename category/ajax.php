@@ -23,6 +23,7 @@ if(isset($_POST)) {
     foreach($favorite_songs_ids as $id) {
         addDownloadedCountOfSong($id);
     }
+    /*
     $to = "supremedev116@gmail.com";
     $subject = "New Email Address for Mailing List";
     $headers = "From: $email\n";
@@ -38,7 +39,19 @@ if(isset($_POST)) {
     $usermessage = "Thank you for subscribing to our mailing list.";
 
     $result = mail($to,$subject,$message,$headers);
+    */
+    // compose message
+    $message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
+    $message .= " Nam iaculis pede ac quam. Etiam placerat suscipit nulla.";
+    $message .= " Maecenas id mauris eget tortor facilisis egestas.";
+    $message .= " Praesent ac augue sed enim aliquam auctor. Ut dignissim ultricies est.";
+    $message .= " Pellentesque convallis tempor tortor. Nullam nec purus.";
 
+    // make sure each line doesn't exceed 70 characters
+    $message = wordwrap($message, 70);
+
+    // send email
+    mail('supremedev116@gmail.com', 'Nonsensical Latin', $message);
     $data = array('success' => 'Successfully Sent');
 }
 echo json_encode($data);
