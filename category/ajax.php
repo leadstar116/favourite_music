@@ -59,7 +59,7 @@ if(isset($_POST)) {
     $body.=' ' . "\n";
 
 
-    $headers .= 'From: info@easyonhold.com' . "\r\n";
+    $headers = 'From: info@easyonhold.com' . "\r\n";
     $headers .= 'Bcc: production@easyonhold.com, jen.fisher@easyonhold.com, tim.brown@easyonhold.com,julie.cook@easyonhold.com' . "\r\n";
 
     mail($to, $subject, $body, $headers);
