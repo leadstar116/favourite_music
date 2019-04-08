@@ -133,18 +133,13 @@ body {
 }
 
 .favorite-section ul li:hover {
-    color: #0f0;
+    color: #c72a2a;
     cursor: pointer;
 }
 
 .favorite-section .remove-favorite {
     text-align: center;
     font-size: 20px;
-}
-
-.favorite-section .remove-favorite a:hover {
-    color: #f00;
-    cursor: pointer;
 }
 
 .favorite-section .selected {
@@ -406,6 +401,19 @@ div.progress {
 }
 
 .songs-section ul li:hover .single-add-favorite-btn{  
+    opacity: 1;
+}
+.single-remove-favorite-btn {
+    position: absolute;
+    right: 40px;
+    top: 0px;
+    opacity: 0;
+    transition: 0.3s;
+}
+#favorite_songs_list li {
+    position: relative;
+}
+#favorite_songs_list li:hover .single-remove-favorite-btn{  
     opacity: 1;
 }
 
