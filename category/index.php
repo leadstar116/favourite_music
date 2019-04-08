@@ -61,7 +61,7 @@
                             ?>
                                 <li attr-id="<?= $id ?>" style="position: relative;" audiourl="<?= $dir.$song['song_name'] ?>" cover="<?= $album ?>" >
                                     <?= substr($song['song_name'], 0, -4) ?>
-                                    <a class="single-add-favorite-btn" attr-id="<?= $id ?>" attr-text="<?= substr($song['song_name'], 0, -4) ?>"><i class="fa fa-plus" title="Add to favorite"></i></a>
+                                    <a class="single-add-favorite-btn" attr-id="<?= $id ?>" attr-text="<?= substr($song['song_name'], 0, -4) ?>" audiourl="<?= $dir.$song['song_name'] ?>"><i class="fa fa-plus" title="Add to favorite"></i></a>
                                 </li>
                             <?php
                             }    
@@ -78,7 +78,7 @@
                     <span>My Favorites</span>
                 </div>
                 <div>
-                    <ul id="favorite_songs_list">
+                    <ul id="favorite_songs_list" class="favorite-playlist">
                         
                     </ul>                    
                 </div>

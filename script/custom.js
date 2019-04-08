@@ -1,11 +1,13 @@
 $(document).ready(function(){
     var favorite_songs = sessionStorage.getItem("favorite_songs");  
     var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
+    var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
     if(favorite_songs != undefined) {
         favorite_songs = favorite_songs.split(",");
         favorite_songs_name = favorite_songs_name.split(",");
+        favorite_songs_url = favorite_songs_url.split(",");
         for(var index = 0; index < favorite_songs.length; index++) {
-            $('#favorite_songs_list').append('<li attr-id="'+ favorite_songs[index] +'">'+ favorite_songs_name[index] +'<a class="single-remove-favorite-btn" attr-id="'+favorite_songs[index]+'" attr-text="'+favorite_songs_name[index]+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
+            $('#favorite_songs_list').append('<li attr-id="'+ favorite_songs[index] +'" audiourl="'+favorite_songs_url[index]+'">'+ favorite_songs_name[index] +'<a class="single-remove-favorite-btn" attr-id="'+favorite_songs[index]+'" attr-text="'+favorite_songs_name[index]+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
             $('#favorite_songs_list_modal').append('<li attr-id="'+ favorite_songs[index] +'">'+ favorite_songs_name[index] +'</li>');
         }
     }
@@ -39,7 +41,8 @@ $(document).on('click', '#add-favorite-btn', function(){
 
 $(document).on('click', '.add-favorite-player-btn', function(){
     var favorite_songs = sessionStorage.getItem("favorite_songs");
-    var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
+    var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");        
+    var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");                 
     if(favorite_songs == undefined) {
         favorite_songs = [];
     } else {
@@ -50,16 +53,23 @@ $(document).on('click', '.add-favorite-player-btn', function(){
     } else {
         favorite_songs_name = favorite_songs_name.split(",");
     }
+    if(favorite_songs_url == undefined) {
+        favorite_songs_url = [];
+    } else {
+        favorite_songs_url = favorite_songs_url.split(",");
+    }
     if($.inArray($(this).attr('attr-id').toString(), favorite_songs) == -1){
         favorite_songs.push($(this).attr('attr-id'));
         favorite_songs_name.push($(this).attr('attr-text'));
-        $('#favorite_songs_list').append('<li attr-id="'+ $(this).attr('attr-id') +'">'+ $(this).attr('attr-text') +'<a class="single-remove-favorite-btn" attr-id="'+$(this).attr('attr-id')+'" attr-text="'+$(this).attr('attr-text')+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
+        favorite_songs_url.push($(this).attr('audiourl'));
+        $('#favorite_songs_list').append('<li attr-id="'+ $(this).attr('attr-id') +'" audiourl="'+$(this).attr('audiourl')+'">'+ $(this).attr('attr-text') +'<a class="single-remove-favorite-btn" attr-id="'+$(this).attr('attr-id')+'" attr-text="'+$(this).attr('attr-text')+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
         $('#favorite_songs_list_modal').append('<li attr-id="'+ $(this).attr('attr-id') +'">'+ $(this).attr('attr-text') +'</li>');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart-o');
     } else {
         favorite_songs.splice($.inArray($(this).attr('attr-id'), favorite_songs),1);
         favorite_songs_name.splice($.inArray($(this).attr('attr-text'), favorite_songs_name),1);
+        favorite_songs_url.splice($.inArray($(this).attr('audiourl'), favorite_songs_url),1);
         $('#favorite_songs_list li[attr-id="'+$(this).attr('attr-id')+'"]').remove();
         $('#favorite_songs_list_modal li[attr-id="'+ $(this).attr('attr-id') +'"]').remove();
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart-o');
@@ -68,6 +78,7 @@ $(document).on('click', '.add-favorite-player-btn', function(){
 
     sessionStorage.setItem("favorite_songs", favorite_songs);
     sessionStorage.setItem("favorite_songs_name", favorite_songs_name);   
+    sessionStorage.setItem("favorite_songs_url", favorite_songs_url);   
 });
 
 $(document).on('click', '#songs_list li', function(){    
@@ -83,6 +94,7 @@ $(document).on('click', '#favorite_songs_list li', function(){
 $(document).on('click', '.single-add-favorite-btn', function(){
     var favorite_songs = sessionStorage.getItem("favorite_songs");
     var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
+    var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
     if(favorite_songs == undefined) {
         favorite_songs = [];
     } else {
@@ -93,10 +105,17 @@ $(document).on('click', '.single-add-favorite-btn', function(){
     } else {
         favorite_songs_name = favorite_songs_name.split(",");
     }
+    if(favorite_songs_url == undefined) {
+        favorite_songs_url = [];
+    } else {
+        favorite_songs_url = favorite_songs_url.split(",");
+    }
     if($.inArray($(this).attr('attr-id').toString(), favorite_songs) == -1){
         favorite_songs.push($(this).attr('attr-id'));
         favorite_songs_name.push($(this).attr('attr-text'));
-        $('#favorite_songs_list').append('<li attr-id="'+ $(this).attr('attr-id') +'">'+ $(this).attr('attr-text') +'</li>');
+        favorite_songs_url.push($(this).attr('audiourl'));
+        console.log($(this).attr('audiourl'));
+        $('#favorite_songs_list').append('<li attr-id="'+ $(this).attr('attr-id') +'" audiourl="'+$(this).attr('audiourl')+'">'+ $(this).attr('attr-text') +'</li>');
         $('#favorite_songs_list_modal').append('<li attr-id="'+ $(this).attr('attr-id') +'">'+ $(this).attr('attr-text') +'</li>');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart-o');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart');
@@ -104,10 +123,12 @@ $(document).on('click', '.single-add-favorite-btn', function(){
 
     sessionStorage.setItem("favorite_songs", favorite_songs);
     sessionStorage.setItem("favorite_songs_name", favorite_songs_name);    
+    sessionStorage.setItem("favorite_songs_url", favorite_songs_url);    
 });
 $(document).on('click', '.single-remove-favorite-btn', function(){
     var favorite_songs = sessionStorage.getItem("favorite_songs");
     var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
+    var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
     if(favorite_songs == undefined) {
         favorite_songs = [];
     } else {
@@ -118,23 +139,33 @@ $(document).on('click', '.single-remove-favorite-btn', function(){
     } else {
         favorite_songs_name = favorite_songs_name.split(",");
     }
+    if(favorite_songs_url == undefined) {
+        favorite_songs_url = [];
+    } else {
+        favorite_songs_url = favorite_songs_url.split(",");
+    }
     if($.inArray($(this).attr('attr-id').toString(), favorite_songs) != -1){
         favorite_songs.splice($.inArray($(this).attr('attr-id'), favorite_songs),1);
         favorite_songs_name.splice($.inArray($(this).attr('attr-text'), favorite_songs_name),1);
+        favorite_songs_url.splice($.inArray($(this).attr('attr-text'), favorite_songs_url),1);
         $('#favorite_songs_list li[attr-id="'+$(this).attr('attr-id')+'"]').remove();
         $('#favorite_songs_list_modal li[attr-id="'+ $(this).attr('attr-id') +'"]').remove();
-        $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart-o');
-        $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart');
+        if($('.player a[attr-id="'+$(this).attr('attr-id')+'"]').length) {
+            stopAudio();
+            $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart-o');
+            $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart');
+        }
     }        
 
     sessionStorage.setItem("favorite_songs", favorite_songs);
     sessionStorage.setItem("favorite_songs_name", favorite_songs_name);    
+    sessionStorage.setItem("favorite_songs_url", favorite_songs_url);    
 });
 /*
 $(document).on('click', '#remove-favorite-btn', function(){    
     $('#removeModal').modal('show');  
 });
-*/
+
 $(document).on('click', '#modal-btn-yes', function(){
     var favorite_songs = sessionStorage.getItem("favorite_songs");
     var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
@@ -157,7 +188,7 @@ $(document).on('click', '#modal-btn-yes', function(){
     sessionStorage.setItem("favorite_songs", favorite_songs);
     sessionStorage.setItem("favorite_songs_name", favorite_songs_name);  
 });
-
+*/
 $(document).on('click', '#submit-mail-btn', function(){
     var favorite_songs = sessionStorage.getItem("favorite_songs");
     if(favorite_songs == undefined) {

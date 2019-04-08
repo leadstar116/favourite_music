@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
     var song;
     var tracker = $('.tracker');
     var volume = $('.volume');
+    var playlistType = '.playlist';
 
     function initAudio(elem, autoplay = true) {
         var url = elem.attr('audiourl');
@@ -29,7 +30,7 @@ jQuery(document).ready(function() {
         }
         $('.player .title').text(title);
         if($.inArray(elem.attr('attr-id').toString(), favorite_songs) == -1){
-            $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" class="add-favorite-player-btn"><i class="fa fa-heart-o" style="color: #f00;"></i></a>');
+            $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" audiourl="'+url+'" class="add-favorite-player-btn"><i class="fa fa-heart-o" style="color: #f00;"></i></a>');
         } else {
             $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" class="add-favorite-player-btn"><i class="fa fa-heart" style="color: #f00;"></i></a>');
         }
@@ -55,7 +56,7 @@ jQuery(document).ready(function() {
             $('.pause').removeClass('visible');
         });
 
-        $('.playlist li').removeClass('active');
+        $(playlistType+' li').removeClass('active');
         elem.addClass('active');
         if(autoplay) {
             $('.play').addClass('hidden');
@@ -97,11 +98,11 @@ jQuery(document).ready(function() {
 
         stopAudio();
 
-        var next = $('.playlist li.active').next();
+        var next = $(playlistType+' li.active').next();
         if (next.length == 0) {
-            next = $('.playlist li:first-child');
+            next = $(playlistType+' li:first-child');
         }
-        $('.playlist li').removeClass('selected');
+        $(playlistType+' li').removeClass('selected');
         next.addClass('selected');        
         initAudio(next);
     });
@@ -112,11 +113,11 @@ jQuery(document).ready(function() {
 
         stopAudio();
 
-        var prev = $('.playlist li.active').prev();
+        var prev = $(playlistType+' li.active').prev();
         if (prev.length == 0) {
-            prev = $('.playlist li:last-child');
+            prev = $(playlistType+' li:last-child');
         }
-        $('.playlist li').removeClass('selected');
+        $(playlistType+' li').removeClass('selected');
         prev.addClass('selected');     
         initAudio(prev);
     });
@@ -131,6 +132,17 @@ jQuery(document).ready(function() {
     // playlist elements - click
     $('.playlist li').click(function () {        
         stopAudio();
+        $('.favorite-playlist li').removeClass('selected');
+        $('.favorite-playlist li').removeClass('active');
+        playlistType = '.playlist';
+        initAudio($(this));
+    });
+
+    $(document).on('click', '.favorite-playlist li', function () {        
+        stopAudio();
+        $('.playlist li').removeClass('selected');
+        $('.playlist li').removeClass('active');
+        playlistType = '.favorite-playlist';
         initAudio($(this));
     });
 
