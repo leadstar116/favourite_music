@@ -151,7 +151,6 @@ $(document).on('click', '.single-remove-favorite-btn', function(){
         $('#favorite_songs_list li[attr-id="'+$(this).attr('attr-id')+'"]').remove();
         $('#favorite_songs_list_modal li[attr-id="'+ $(this).attr('attr-id') +'"]').remove();
         if($('.player a[attr-id="'+$(this).attr('attr-id')+'"]').length) {
-            stopAudio();
             $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart-o');
             $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart');
         }

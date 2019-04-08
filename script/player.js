@@ -30,9 +30,9 @@ jQuery(document).ready(function() {
         }
         $('.player .title').text(title);
         if($.inArray(elem.attr('attr-id').toString(), favorite_songs) == -1){
-            $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" audiourl="'+url+'" class="add-favorite-player-btn"><i class="fa fa-heart-o" style="color: #f00;"></i></a>');
+            $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" audiourl="'+url+'" class="add-favorite-player-btn ml-1"><i class="fa fa-heart-o" style="color: #f00;"></i></a>');
         } else {
-            $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" class="add-favorite-player-btn"><i class="fa fa-heart" style="color: #f00;"></i></a>');
+            $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" audiourl="'+url+'" class="add-favorite-player-btn ml-1"><i class="fa fa-heart" style="color: #f00;"></i></a>');
         }
         $('.player .artist').text(artist);
         $('.player .cover').css('background-image','url("'+cover+'")');;
