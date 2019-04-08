@@ -6,7 +6,7 @@
         error_reporting(E_ALL);
     }
 
-    $subdir = "/favourite_music";
+    $subdir = "/music-on-hold/music-tracks";
     include_once("core/functions.php");
     include_once("includes/header.php");
 
@@ -28,7 +28,7 @@
                 <div class="col-6 col-md-4 col-lg-3" id="category-<?= $id ?>">
                     <div class="category-wrapper">
                         <div class="category-album">
-                            <a href="category/index.php?id=<?= $id ?>"><img src="/img/music-samples/<?= $category['category_name'] ?>.png" alt="" onerror="this.onerror=null;this.src='/img/music-samples/default_album.jpg';"></a>
+                            <a href="category/index.php?id=<?= $id ?>"><img src="<?= $subdir ?>/img/music-samples/<?= $category['category_name'] ?>.png" alt="" onerror="this.onerror=null;this.src='<?= $subdir ?>/img/music-samples/default_album.jpg';"></a>
                         </div>
                         <div class="category-info">
                             <a href="category/index.php?id=<?= $id ?>"><?= $category['category_name'] ?></a>

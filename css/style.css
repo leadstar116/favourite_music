@@ -49,7 +49,7 @@ body {
 .category-name {
     color: #fff;
     font-size: 30px;
-    margin: 10px;
+    margin: 0px 10px 10px 10px;
 }
 
 .shadow-box {
@@ -58,11 +58,22 @@ body {
     box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
 }
 
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+}
+
 .songs-section {
     color: #fff;    
-    background-image: url('/favourite_music/assets/music-background-image.png');    
+    background-image: url('/music-on-hold/music-tracks/assets/music-background-image.png');    
     background-position: center;
-    padding: 10px;
+    padding: 0px;
 }
 
 .songs-section ul {
@@ -76,7 +87,7 @@ body {
 
 .songs-section ul li:hover {
     color: #0f0;
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .songs-section .add-favorite {
@@ -95,7 +106,7 @@ body {
 
 .favorite-section {
     color: #fff;    
-    background-image: url('/favourite_music/assets/music-background.png');    
+    background-image: url('/music-on-hold/music-tracks/assets/music-background.png');    
     background-position: center;
     padding: 10px;
 }
@@ -278,8 +289,8 @@ input:focus{
 .dashboard .sidebar-sticky {
     position: -webkit-sticky;
     position: sticky;
-    top: 48px; /* Height of navbar */
-    height: calc(100vh - 48px);
+    top: 80px; /* Height of navbar */
+    height: calc(100vh - 80px);
     padding-top: .5rem;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -378,3 +389,143 @@ div.progress {
     color: #ffffff;
 }
 
+.single-add-favorite-btn {
+    position: absolute;
+    right: 40px;
+    top: 0px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.songs-section ul li:hover .single-add-favorite-btn{  
+    opacity: 1;
+}
+
+.player {
+    background: transparent url("../assets/spr.png") no-repeat scroll center top;
+    height: 162px;
+    position: relative;
+    width: 326px;
+    z-index: 2;
+    margin: auto;
+}
+.player .title, .artist {
+    font-family: verdana;
+    left: 167px;
+    position: absolute;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.player .title {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    top: 23px;
+}
+.player .artist {
+    color: #EEEEEE;
+    font-size: 12px;
+    top: 40px;
+}
+.player .pl {
+    background: transparent ('/music-on-hold/music-tracks/assets/spr.png') no-repeat scroll -274px -175px;
+    cursor: pointer;
+    height: 34px;
+    left: 270px;
+    position: absolute;
+    top: 20px;
+    width: 32px;
+}
+.player .pl:hover {
+    top: 21px;
+}
+.player .cover {    
+    background-size: cover;
+    border-radius: 5px 5px 5px 5px;
+    height: 94px;
+    left: 20px;
+    position: absolute;
+    top: 20px;
+    width: 94px;
+}
+.player .controls {
+    cursor: pointer;
+    height: 23px;
+    left: 167px;
+    position: absolute;
+    top: 65px;
+    width: 138px;
+}
+.player .controls .play, .controls .pause, .controls .rew, .controls .fwd {
+    background: transparent url('/music-on-hold/music-tracks/assets/spr.png') no-repeat scroll 0 0;
+    float: left;
+    height: 100%;
+    width: 33%;
+}
+.player .controls .play {
+    background-position: -8px -171px;
+}
+.player .controls .pause {
+    background-position: -8px -198px;
+    display: none;
+}
+.player .controls .rew {
+    background-position: -54px -171px;
+}
+.player .controls .fwd {
+    background-position: -100px -171px;
+}
+.player .controls .play:hover {
+    background-position: -8px -170px;
+}
+.player .controls .pause:hover {
+    background-position: -8px -197px;
+}
+.player .controls .rew:hover {
+    background-position: -54px -170px;
+}
+.player .controls .fwd:hover {
+    background-position: -100px -170px;
+}
+.player .hidden {
+    display: none;
+}
+.player .controls .visible {
+    display: block;
+}
+.player .volume {
+    height: 11px;
+    left: 186px;
+    position: absolute;
+    top: 96px;
+    width: 112px;
+}
+.player .tracker {
+    height: 15px;
+    left: 20px;
+    position: absolute;
+    top: 126px;
+    width: 285px;
+}
+.player .ui-slider-range {
+    background: transparent url('/music-on-hold/music-tracks/assets/spr.png') no-repeat scroll 5px -222px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+.player .ui-slider-handle {
+    cursor: pointer;
+    height: 10px;
+    margin-left: -5px;
+    position: absolute;
+    top: 2px;
+    width: 10px;
+    z-index: 2;
+}
+.player .volume .ui-slider-handle {
+    background: url('/music-on-hold/music-tracks/assets/spr.png') no-repeat scroll -201px -188px rgba(0, 0, 0, 0);
+    height: 13px;
+    width: 13px;
+}

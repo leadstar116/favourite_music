@@ -6,7 +6,7 @@ if ($debugging) {
     error_reporting(E_ALL);
 }
 
-$subdir = "/favourite_music";
+$subdir = "/music-on-hold/music-tracks";
 include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/core/functions.php");
 include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/includes/header.php");
 
@@ -21,7 +21,7 @@ $songs = getSongsByCategoryId($category_id);
 
 <body class="dashboard">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Music On-Hold Now</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img src="<?= $subdir.'/assets' ?>/admin_logo.png" alt="" style="height:50px;"></a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="../logout.php">Sign out</a>
@@ -62,6 +62,11 @@ $songs = getSongsByCategoryId($category_id);
                 </div>
                 <div class="row">                    
                     <div class="col-sm-12">
+                        <div class="mb-3 pb-3 border-bottom">
+                            <input type="file" id="albumChangeUploadBtn" name="album" class="btn btn-primary btn-add-image" style="display: none;">                    
+                            <label for="albumChangeUploadBtn" class="btn btn-primary mr-3">Change album</label>                       
+                            <img id="imageChangeSrc" style="width: 200px; height: 200px;" src="<?= $subdir.'/img/music-samples/'.$category['category_name'].'.png'; ?>"/> 
+                        </div>
                         <table class="table use-dataTable category-table">
                             <thead class="thead-dark">
                                 <tr>

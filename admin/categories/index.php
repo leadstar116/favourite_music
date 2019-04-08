@@ -6,7 +6,7 @@ if ($debugging) {
   error_reporting(E_ALL);
 }
 
-$subdir = "/favourite_music";
+$subdir = "/music-on-hold/music-tracks";
 include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/core/functions.php");
 include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/includes/header.php");
 
@@ -15,7 +15,7 @@ $categories = getAllCategories();
 
 <body class="dashboard">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Music On-Hold Now</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img src="<?= $subdir.'/assets' ?>/admin_logo.png" alt="" style="height:50px;"></a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="../logout.php">Sign out</a>

@@ -6,7 +6,7 @@
         error_reporting(E_ALL);
     }
 
-    $subdir = "/favourite_music";
+    $subdir = "/music-on-hold/music-tracks";
     include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/core/functions.php");
 
     $show_error = false;
@@ -23,9 +23,9 @@
                 mkdir($uploaddir, 0777, true);
             }
             if($_POST['album']) {
-                $uploaddir = $_SERVER['DOCUMENT_ROOT'].'/img/music-samples/';
-                if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/img')) {
-                    mkdir($_SERVER['DOCUMENT_ROOT'].'/img', 0777, true);
+                $uploaddir = $_SERVER['DOCUMENT_ROOT'].$subdir.'/img/music-samples/';
+                if (!file_exists($_SERVER['DOCUMENT_ROOT'].$subdir.'/img')) {
+                    mkdir($_SERVER['DOCUMENT_ROOT'].$subdir.'/img', 0777, true);
                 }
                 if (!file_exists($uploaddir)) {
                     mkdir($uploaddir, 0777, true);
@@ -38,7 +38,7 @@
             $result = addCategory($category_name);
         
             if($result['success']) {
-                header('Location: /favourite_music/admin/');
+                header('Location: /music-on-hold/music-tracks/admin/');
             } else {
                 $show_error = true;
                 if(!isset($result['error'])) {
@@ -58,7 +58,7 @@
 
 <body class="dashboard">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Music On-Hold Now</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img src="<?= $subdir.'/assets' ?>/admin_logo.png" alt="" style="height:50px;"></a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="../logout.php">Sign out</a>
@@ -100,7 +100,7 @@
                     <div class="col-sm-12 mb-3 form-group">                    
                         <input type="file" id="albumUploadBtn" name="album" class="btn btn-primary btn-add-image" style="display: none;">                    
                         <label for="albumUploadBtn" class="btn btn-primary mr-3">Add album</label>                       
-                        <img id="imageSrc" style="width: 200px; height: 200px;" />                    
+                        <img id="imageSrc" style="width: 200px; height: 200px;" />  
                     </div>                
                     <div class="col-sm-12 form-group">
                         <input id="save-category-btn" class="btn btn-primary" type="submit" value="Save">

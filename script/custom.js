@@ -52,6 +52,30 @@ $(document).on('click', '#favorite_songs_list li', function(){
     }
 });
 
+$(document).on('click', '.single-add-favorite-btn', function(){
+    var favorite_songs = sessionStorage.getItem("favorite_songs");
+    var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
+    if(favorite_songs == undefined) {
+        favorite_songs = [];
+    } else {
+        favorite_songs = favorite_songs.split(",");
+    }
+    if(favorite_songs_name == undefined) {
+        favorite_songs_name = [];
+    } else {
+        favorite_songs_name = favorite_songs_name.split(",");
+    }
+    if($.inArray($(this).attr('attr-id').toString(), favorite_songs) == -1){
+        favorite_songs.push($(this).attr('attr-id'));
+        favorite_songs_name.push($(this).attr('attr-text'));
+        $('#favorite_songs_list').append('<li attr-id="'+ $(this).attr('attr-id') +'">'+ $(this).attr('attr-text') +'</li>');
+        $('#favorite_songs_list_modal').append('<li attr-id="'+ $(this).attr('attr-id') +'">'+ $(this).attr('attr-text') +'</li>');
+    }        
+
+    sessionStorage.setItem("favorite_songs", favorite_songs);
+    sessionStorage.setItem("favorite_songs_name", favorite_songs_name);    
+});
+
 $(document).on('click', '#remove-favorite-btn', function(){    
     $('#removeModal').modal('show');  
 });
@@ -243,6 +267,25 @@ $("#albumUploadBtn").on('change', function (event) {
         var formdata = new FormData();
         formdata.append("file", file);
         formdata.append("type", 'upload_temp_image');
+        
+        var ajax = new XMLHttpRequest();     
+        ajax.open("POST", "ajax.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP        
+        ajax.send(formdata);     
+    }
+    return false;
+});
+
+$("#albumChangeUploadBtn").on('change', function (event) {
+    if($(this).prop('files').length > 0)
+    { 
+        var file = $(this).prop('files')[0];
+        $("#imageChangeSrc").attr("src", URL.createObjectURL($(this).prop('files')[0]));   
+        
+        var formdata = new FormData();
+        formdata.append("file", file);
+        formdata.append("category_id", $("#category_id").val());
+        formdata.append("category_name", $("#category_name").val());
+        formdata.append("type", 'change_album_image');
         
         var ajax = new XMLHttpRequest();     
         ajax.open("POST", "ajax.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP        

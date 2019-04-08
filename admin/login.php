@@ -10,7 +10,7 @@
         error_reporting(E_ALL);
     }
 
-    $subdir = "/favourite_music";
+    $subdir = "/music-on-hold/music-tracks";
     include_once("../core/functions.php");
 
     $show_error = false;
@@ -19,7 +19,7 @@
         
         if($result['success']) {
             $_SESSION['user_id'] = $result['id'];
-            header('Location: /favourite_music/admin/');
+            header('Location: /music-on-hold/music-tracks/admin/');
         } else {
             $show_error = true;
             $error_message = 'Wrong username or password';

@@ -12,5 +12,5 @@ if(!isset($_SESSION)) {
 session_unset();
 session_destroy();
 
-header('Location: /favourite_music/admin/');
+header('Location: /music-on-hold/music-tracks/admin/');
 ?>

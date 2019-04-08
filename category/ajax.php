@@ -6,7 +6,7 @@ if($debugging) {
     error_reporting(E_ALL);
 }
 
-$subdir = "/favourite_music";
+$subdir = "/music-on-hold/music-tracks";
 include_once("../core/functions.php");
 
 if(isset($_POST)) {

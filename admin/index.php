@@ -11,7 +11,7 @@
     }
 
     if(isset($_SESSION['user_id'])) {        
-        header('Location: /favourite_music/admin/categories/index.php');
+        header('Location: /music-on-hold/music-tracks/admin/categories/index.php');
     } else {
         include_once('login.php');
     }

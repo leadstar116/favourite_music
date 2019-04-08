@@ -6,7 +6,7 @@
         error_reporting(E_ALL);
     }
 
-    $subdir = "/favourite_music";
+    $subdir = "/music-on-hold/music-tracks";
     include_once("../core/functions.php");
     include_once("../includes/header.php");
 
@@ -24,27 +24,54 @@
         <h3>Songs</h3>
     </div>    
     <!-- title end -->
-    <!-- main Songs section     -->
-    <div class="container">
+    <!-- main Songs section     -->    
+    <div class="container">        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="player mb-4">
+                    <div class="pl"></div>
+                    <div class="title"></div>
+                    <div class="artist"></div>
+                    <div class="cover"></div>
+                    <div class="controls">
+                        <div class="play"></div>
+                        <div class="pause"></div>
+                        <div class="rew"></div>
+                        <div class="fwd"></div>
+                    </div>
+                    <div class="volume"></div>
+                    <div class="tracker"></div>
+                </div>
+            </div>
+        </div>
         <div class="row shadow-box">
-            <div class="col-md-6 songs-section">
-                <div class="category-name">
-                    <span><?= $category['category_name'] ?></span>
-                </div>
-                <div>
-                    <ul id="songs_list">
-                        <?php 
-                        foreach($songs as $id => $song) {                             
-                        ?>
-                            <li attr-id="<?= $id ?>"><?= substr($song['song_name'], 0, -4) ?></li>
-                        <?php
-                        }    
-                        ?>
-                    </ul>                    
-                </div>
-                <div class="add-favorite">
-                    <a id="add-favorite-btn">Add To Favorite</a>
-                </div>
+            <?php 
+                $album = $subdir.'/img/music-samples/'. $category['category_name'] .'.png';                 
+            ?>
+            <div class="col-md-6 songs-section" <?php if(file_exists($_SERVER['DOCUMENT_ROOT'].$album)) { ?> style="background-image: url('<?= $album ?>');" <?php } ?>>
+                <div class="overlay">
+                    <div class="category-name">
+                        <span><?= $category['category_name'] ?></span>
+                    </div>
+                    <div>
+                        <ul id="songs_list" class="playlist">
+                            <?php 
+                            $dir = '/audio_bin/' . $category['category_name'] .'/';                        
+                            foreach($songs as $id => $song) {                             
+                            ?>
+                                <li attr-id="<?= $id ?>" style="position: relative;" audiourl="<?= $dir.$song['song_name'] ?>" cover="<?= $album ?>" >
+                                    <?= substr($song['song_name'], 0, -4) ?>
+                                    <a class="single-add-favorite-btn" attr-id="<?= $id ?>" attr-text="<?= substr($song['song_name'], 0, -4) ?>"><i class="fa fa-plus" title="Add to favorite"></i></a>
+                                </li>
+                            <?php
+                            }    
+                            ?>
+                        </ul>                    
+                    </div>
+                    <div class="add-favorite">
+                        <a id="add-favorite-btn">Add To Favorite</a>
+                    </div>
+                </div>                
             </div>
             <div class="col-md-6 favorite-section">
                 <div class="favorite-name">
