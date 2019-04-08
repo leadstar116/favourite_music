@@ -30,7 +30,7 @@
             <div class="col-md-12">
                 <div class="player mb-4">
                     <div class="pl"></div>
-                    <div class="title"></div>
+                    <div class="title"></div>                    
                     <div class="artist"></div>
                     <div class="cover"></div>
                     <div class="controls">
@@ -83,7 +83,7 @@
                     </ul>                    
                 </div>
                 <div class="remove-favorite">
-                    <a id="remove-favorite-btn">Remove From Favorite</a>
+                    <a id="remove-favorite-btn">- REMOVE FROM FAVORITES</a>
                 </div>                
             </div>        
         </div>

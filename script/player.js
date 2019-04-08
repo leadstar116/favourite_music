@@ -20,8 +20,19 @@ jQuery(document).ready(function() {
         var title = elem.text();
         var cover = elem.attr('cover');
         var artist = elem.attr('artist');
+        var favorite_songs = sessionStorage.getItem("favorite_songs");
 
+        if(favorite_songs == undefined) {
+            favorite_songs = [];
+        } else {
+            favorite_songs = favorite_songs.split(",");
+        }
         $('.player .title').text(title);
+        if($.inArray(elem.attr('attr-id').toString(), favorite_songs) == -1){
+            $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" class="add-favorite-player-btn"><i class="fa fa-heart-o" style="color: #f00;"></i></a>');
+        } else {
+            $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" class="add-favorite-player-btn"><i class="fa fa-heart" style="color: #f00;"></i></a>');
+        }
         $('.player .artist').text(artist);
         $('.player .cover').css('background-image','url("'+cover+'")');;
 
@@ -114,16 +125,17 @@ jQuery(document).ready(function() {
     });
 
     // playlist elements - click
-    $('.playlist li').click(function () {
+    $('.playlist li').click(function () {        
         stopAudio();
         initAudio($(this));
     });
 
     // initialization - first element in playlist
-    initAudio($('.playlist li:first-child'), false);
-
-    // set volume
-    song.volume = 0.8;
+    if($('.playlist').length) {
+        initAudio($('.playlist li:first-child'), false);
+        // set volume
+        song.volume = 0.8;
+    }
 
     // initialize the volume slider
     volume.slider({

@@ -102,6 +102,10 @@ body {
     cursor: pointer;
 }
 
+.player .add-favorite-player-btn:hover {
+    cursor: pointer;
+}
+
 .songs-section .selected {
     color: #f9e36b;
 }
