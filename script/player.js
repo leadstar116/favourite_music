@@ -101,6 +101,8 @@ jQuery(document).ready(function() {
         if (next.length == 0) {
             next = $('.playlist li:first-child');
         }
+        $('.playlist li').removeClass('selected');
+        next.addClass('selected');        
         initAudio(next);
     });
 
@@ -114,6 +116,8 @@ jQuery(document).ready(function() {
         if (prev.length == 0) {
             prev = $('.playlist li:last-child');
         }
+        $('.playlist li').removeClass('selected');
+        prev.addClass('selected');     
         initAudio(prev);
     });
 

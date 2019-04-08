@@ -75,12 +75,9 @@ $(document).on('click', '#songs_list li', function(){
     $(this).addClass('selected');
 });
 
-$(document).on('click', '#favorite_songs_list li', function(){        
-    if($(this).hasClass('selected')) {
-        $(this).removeClass('selected');
-    } else {
-        $(this).addClass('selected');
-    }
+$(document).on('click', '#favorite_songs_list li', function(){       
+    $('#favorite_songs_list li').removeClass('selected');    
+    $(this).addClass('selected'); 
 });
 
 $(document).on('click', '.single-add-favorite-btn', function(){
