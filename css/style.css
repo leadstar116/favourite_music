@@ -390,7 +390,9 @@ div.progress {
     font-size: 14px;
     color: #ffffff;
 }
-
+#add-favorite-btn:hover {
+    color: #ffffff;
+}
 .single-add-favorite-btn {
     position: absolute;
     right: 40px;

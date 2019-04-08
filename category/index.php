@@ -69,7 +69,7 @@
                         </ul>                    
                     </div>
                     <div class="add-favorite">
-                        <a id="add-favorite-btn">Add To Favorite</a>
+                        <a id="add-favorite-btn">+ ADD TO FAVORITES</a>
                     </div>
                 </div>                
             </div>

@@ -10,7 +10,7 @@ $(document).ready(function(){
         }
     }
 });
-
+/*
 $(document).on('click', '#add-favorite-btn', function(){
     var favorite_songs = sessionStorage.getItem("favorite_songs");
     var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
@@ -35,16 +35,14 @@ $(document).on('click', '#add-favorite-btn', function(){
     sessionStorage.setItem("favorite_songs", favorite_songs);
     sessionStorage.setItem("favorite_songs_name", favorite_songs_name);        
 });
+*/
 
 $(document).on('click', '#songs_list li', function(){    
-    if($(this).hasClass('selected')) {
-        $(this).removeClass('selected');
-    } else {
-        $(this).addClass('selected');
-    }
+    $('#songs_list li').removeClass('selected');    
+    $(this).addClass('selected');
 });
 
-$(document).on('click', '#favorite_songs_list li', function(){    
+$(document).on('click', '#favorite_songs_list li', function(){        
     if($(this).hasClass('selected')) {
         $(this).removeClass('selected');
     } else {
