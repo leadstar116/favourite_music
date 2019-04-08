@@ -15,6 +15,10 @@ if ($_GET['category_id']) {
 } else {
     $category_id = -1;
 }
+
+if (isset($_POST['category_name'])) {
+    changeCategoryName($category_id, $_POST['category_name']);
+}
 $category = getCategoryById($category_id);
 $songs = getSongsByCategoryId($category_id);
 ?>
@@ -53,6 +57,7 @@ $songs = getSongsByCategoryId($category_id);
                         <input id="category_id" style="display:none;" value="<?= $category_id ?>">
                         <input id="category_name" style="display:none;" value="<?= $category['category_name'] ?>">
                         <input type="file" id="uploadBtn" class="btn btn-primary btn-add-image" style="display: none;">
+                        <input type="button" id="changeCategoryNameBtn" class="btn btn-primary pull-right ml-2" value="Change Category Name">
                         <label for="uploadBtn" class="btn btn-primary pull-right">Add New Song</label>   
                         <div class="progress pull-right">
                             <div id="progressBar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
@@ -123,6 +128,28 @@ $songs = getSongsByCategoryId($category_id);
         </div>
     </div>
     <!-- remove song confirmation modal end            -->
+    <!-- change category name modal -->
+    <div id="changeCategoryNameModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form action="edit.php?category_id=<?= $category_id ?>" method="POST">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Change Category Name</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-group" name="category_name" value="<?= $category['category_name'] ?>" class="form-control" required="true">
+                    </div>              
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-default" id="change-name-btn-yes" value="OK" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- change category name modal end            -->
 </body>
 
 <?php

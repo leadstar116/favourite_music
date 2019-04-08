@@ -126,4 +126,21 @@ class Category{
         }
         $qry->close();
     }
+
+    //change category name
+    function changeCategoryName($category_id, $category_name) {
+        $qry = $this->conn->prepare("UPDATE ". $this->table_name ." SET category_name = ? WHERE id = ?;");
+        if ($qry === false) {
+            trigger_error(mysqli_error($this->conn));
+        } else {
+            $qry->bind_param('si', $category_name, $category_id);
+            if ($qry->execute()) {
+                return true;
+            } else {
+                trigger_error(mysqli_error($this->conn));
+            }
+        }
+        $qry->close();
+        return false;
+    }
 }

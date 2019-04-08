@@ -46,6 +46,22 @@ function addCategory($category_name) {
     return $category_db->addCategory($category_name);
 }
 
+function changeCategoryName($category_id, $category_name){
+    global $category_db;
+    global $subdir;
+    $category = $category_db->getById($category_id);
+    if($category_db->changeCategoryName($category_id, $category_name)) {
+        $dir = $_SERVER['DOCUMENT_ROOT'] . '/audio_bin/'; 
+        if(file_exists($dir.$category['category_name'])) {
+            rename($dir.$category['category_name'], $dir.$category_name);
+        }
+        $dir = $_SERVER['DOCUMENT_ROOT'].$subdir.'/img/music-samples/'; 
+        if(file_exists($dir.$category['category_name'].'.png')) {
+            rename($dir.$category['category_name'].'.png', $dir.$category_name.'.png');
+        }
+    }
+}
+
 function getSongsByCategoryId($category_id) {
     global $songs_db;
     return $songs_db->getSongsByCategoryId($category_id);

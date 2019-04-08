@@ -160,6 +160,9 @@ $(document).on('click', '.single-remove-favorite-btn', function(){
     sessionStorage.setItem("favorite_songs_name", favorite_songs_name);    
     sessionStorage.setItem("favorite_songs_url", favorite_songs_url);    
 });
+$(document).on('click', '#changeCategoryNameBtn', function(){    
+    $('#changeCategoryNameModal').modal('show');  
+});
 /*
 $(document).on('click', '#remove-favorite-btn', function(){    
     $('#removeModal').modal('show');  
