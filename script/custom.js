@@ -1,16 +1,120 @@
-$(document).ready(function(){
-    var favorite_songs = sessionStorage.getItem("favorite_songs");  
-    var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
-    var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
-    if(favorite_songs != undefined) {
-        favorite_songs = favorite_songs.split(",");
-        favorite_songs_name = favorite_songs_name.split(",");
-        favorite_songs_url = favorite_songs_url.split(",");
-        for(var index = 0; index < favorite_songs.length; index++) {
-            $('#favorite_songs_list').append('<li attr-id="'+ favorite_songs[index] +'" audiourl="'+favorite_songs_url[index]+'">'+ favorite_songs_name[index] +'<a class="single-remove-favorite-btn" attr-id="'+favorite_songs[index]+'" attr-text="'+favorite_songs_name[index]+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
-            $('#favorite_songs_list_modal').append('<li attr-id="'+ favorite_songs[index] +'">'+ favorite_songs_name[index] +'</li>');
+$(document).on('click', '.category-item', function(){    
+    var formdata = new FormData();
+    formdata.append("category_id", $(this).attr('attr-id'));
+    formdata.append("type", 'GetCategoryContent');
+    
+    $.ajax({
+        url: 'category/ajax.php',
+        type: 'POST',
+        data: formdata,
+        cache: false,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+        success: function(data, textStatus, jqXHR)
+        {
+            if(typeof data.error === 'undefined')
+            {             
+                var modal_data = `
+                    <div class="container">        
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="player mb-4">
+                                <div class="pl"></div>
+                                <div class="title"></div>                    
+                                <div class="artist"></div>
+                                <div class="cover"></div>
+                                <div class="controls">
+                                    <div class="play"></div>
+                                    <div class="pause"></div>
+                                    <div class="rew"></div>
+                                    <div class="fwd"></div>
+                                </div>
+                                <div class="volume"></div>
+                                <div class="tracker"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row shadow-box">
+                        <div class="col-md-6 songs-section" ${(data['background_exist'])? `style='background-image: url("`+ data['album'] +`")'`:''}>
+                            <div class="overlay">
+                                <div class="category-name">
+                                    <span>`+ data['category']['category_name'] +`</span>
+                                </div>
+                                <div>
+                                    <ul id="songs_list" class="playlist">
+                                        `;                                           
+                                        $.each(data.songs, function(id, song) {                             
+                                            modal_data +=`
+                                            <li attr-id="`+ id +`" style="position: relative;" audiourl="`+data['dir']+song['song_name'] +`" cover="`+ data['album'] +`" >
+                                                `+ song['song_name'].substring(0, song['song_name'].length-4) +`
+                                                <a class="single-add-favorite-btn" attr-id="`+id +`" attr-text="`+ song['song_name'].substring(0, song['song_name'].length-4) +`" audiourl="`+ data['dir']+song['song_name'] +`"><i class="fa fa-plus" title="Add to favorite"></i></a>
+                                            </li>
+                                            `;
+                                        });    
+                                    modal_data+=`</ul>                    
+                                </div>
+                                <div class="add-favorite">
+                                    <a id="add-favorite-btn">+ ADD TO FAVORITES</a>
+                                </div>
+                            </div>                
+                        </div>
+                        <div class="col-md-6 favorite-section">
+                            <div class="overlay">
+                                <div class="favorite-name">
+                                    <span>My Favorites</span>
+                                </div>
+                                <div>
+                                    <ul id="favorite_songs_list" class="favorite-playlist">
+                                        
+                                    </ul>                    
+                                </div>
+                                <div class="remove-favorite">
+                                    <a id="remove-favorite-btn">- REMOVE FROM FAVORITES</a>
+                                </div>     
+                            </div>           
+                        </div>        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 submit-mail">
+                            <input id="submit-mail-btn" class="btn btn-primary" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </div>
+                `;
+                $('#songsModal .modal-body').empty();
+                $('#songsModal .modal-body').append(modal_data);
+                var favorite_songs = sessionStorage.getItem("favorite_songs");  
+                var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
+                var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
+                if(favorite_songs != undefined) {
+                    favorite_songs = favorite_songs.split(",");
+                    favorite_songs_name = favorite_songs_name.split(",");
+                    favorite_songs_url = favorite_songs_url.split(",");
+                    for(var index = 0; index < favorite_songs.length; index++) {
+                        $('#favorite_songs_list').append('<li attr-id="'+ favorite_songs[index] +'" audiourl="'+favorite_songs_url[index]+'">'+ favorite_songs_name[index] +'<a class="single-remove-favorite-btn" attr-id="'+favorite_songs[index]+'" attr-text="'+favorite_songs_name[index]+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
+                        $('#favorite_songs_list_modal').append('<li attr-id="'+ favorite_songs[index] +'">'+ favorite_songs_name[index] +'</li>');
+                    }
+                }
+                $('#songsModal').modal('show');  
+                initAudio($('.playlist li:first-child'), false);
+                // set volume
+                song.volume = 0.8;
+                initializeTracker();                
+            }
+            else
+            {
+                // Handle errors here
+                alert('ERRORS: ' + data.error);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            // Handle errors here
+            alert('ERRORS: ' + textStatus);
+            // STOP LOADING SPINNER
         }
-    }
+    });   
 });
 /*
 $(document).on('click', '#add-favorite-btn', function(){

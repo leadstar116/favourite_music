@@ -139,7 +139,7 @@ $songs = getSongsByCategoryId($category_id);
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" class="form-group" name="category_name" value="<?= $category['category_name'] ?>" class="form-control" required="true">
+                        <input type="text" class="form-group col-12" name="category_name" value="<?= $category['category_name'] ?>" class="form-control" required="true">
                     </div>              
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-default" id="change-name-btn-yes" value="OK" />

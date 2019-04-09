@@ -8,7 +8,7 @@
  * Copyright 2012, Script Tutorials
  * http://www.script-tutorials.com/
  */
-jQuery(document).ready(function() {
+//jQuery(document).ready(function() {
 
     // inner variables
     var song;
@@ -79,21 +79,21 @@ jQuery(document).ready(function() {
     }
 
     // play click
-    $('.play').click(function (e) {
+    $(document).on('click', '.play', function (e) {
         e.preventDefault();
 
         playAudio();
     });
 
     // pause click
-    $('.pause').click(function (e) {
+    $(document).on('click', '.pause', function (e) {
         e.preventDefault();
 
         stopAudio();
     });
 
     // forward click
-    $('.fwd').click(function (e) {
+    $(document).on('click', '.fwd', function (e) {
         e.preventDefault();
 
         stopAudio();
@@ -108,7 +108,7 @@ jQuery(document).ready(function() {
     });
 
     // rewind click
-    $('.rew').click(function (e) {
+    $(document).on('click', '.rew', function (e) {
         e.preventDefault();
 
         stopAudio();
@@ -130,7 +130,7 @@ jQuery(document).ready(function() {
     });
 
     // playlist elements - click
-    $('.playlist li').click(function () {        
+    $(document).on('click', '.playlist li', function () {          
         stopAudio();
         $('.favorite-playlist li').removeClass('selected');
         $('.favorite-playlist li').removeClass('active');
@@ -154,26 +154,30 @@ jQuery(document).ready(function() {
     }
 
     // initialize the volume slider
-    volume.slider({
-        range: 'min',
-        min: 1,
-        max: 100,
-        value: 80,
-        start: function(event,ui) {},
-        slide: function(event, ui) {
-            song.volume = ui.value / 100;
-        },
-        stop: function(event,ui) {},
-    });
+    function initializeTracker(){
+        tracker = $('.tracker');
+        volume = $('.volume');
+        volume.slider({
+            range: 'min',
+            min: 1,
+            max: 100,
+            value: 80,
+            start: function(event,ui) {},
+            slide: function(event, ui) {
+                song.volume = ui.value / 100;
+            },
+            stop: function(event,ui) {},
+        });
 
-    // empty tracker slider
-    tracker.slider({
-        range: 'min',
-        min: 0, max: 10,
-        start: function(event,ui) {},
-        slide: function(event, ui) {
-            song.currentTime = ui.value;
-        },
-        stop: function(event,ui) {}
-    });
-});
+        // empty tracker slider
+        tracker.slider({
+            range: 'min',
+            min: 0, max: 10,
+            start: function(event,ui) {},
+            slide: function(event, ui) {
+                song.currentTime = ui.value;
+            },
+            stop: function(event,ui) {}
+        });
+    }
+//});

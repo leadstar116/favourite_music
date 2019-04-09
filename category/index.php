@@ -113,37 +113,7 @@
             </div>
         </div>
     </div>
-    <!-- remove favorite song confirmation modal end            -->
-    <!-- Submit Modal -->
-    <div id="submitModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title" style="width: 100%;">Submit your favorites</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <ul id="favorite_songs_list_modal">
-                            
-                        </ul>                    
-                    </div>
-                    <div class="submit-controls" style="margin-top:10px">
-                        <input type="text" class="form-control white-text" id="submit_name" placeholder="Name" required="true">
-                        <input type="text" class="form-control white-text" id="submit_company" placeholder="Company" required="true">
-                        <input type="email" class="form-control validate white-text" id="submit_email" placeholder="Email" required="true">
-                        <input type="phone" class="form-control validate white-text" id="submit_phone" placeholder="Phone" required="true">
-                        <textarea type="text" id="submit_message" class="md-textarea form-control" rows="4" placeholder="Notes, ideas, questions..."></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer text-center">
-                    <!-- <button type="button" class="btn btn-default" id="modal-btn-submit" data-dismiss="modal">Submit</button>                     -->
-                    <input class="btn btn-primary" type="submit" value="Submit" id="modal-btn-submit">
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- remove favorite song confirmation modal end            -->    
 </body>
 
 <?php
