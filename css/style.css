@@ -25,6 +25,9 @@ body {
     object-fit: cover;
     object-position: center;
 }
+#songsModal {
+    overflow: scroll;
+}
 #songsModal .modal-dialog {
     max-width: 1400px;    
 }
