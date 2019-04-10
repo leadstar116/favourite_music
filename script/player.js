@@ -153,6 +153,11 @@
         song.volume = 0.8;
     }
 
+    $("#songsModal").on("hidden.bs.modal", function () {
+        // put your default event here
+        console.log('aaa');
+        stopAudio();
+    });
     // initialize the volume slider
     function initializeTracker(){
         tracker = $('.tracker');
