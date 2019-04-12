@@ -195,7 +195,8 @@ $(document).on('click', '#favorite_songs_list li', function(){
     $(this).addClass('selected'); 
 });
 
-$(document).on('click', '.single-add-favorite-btn', function(){
+$(document).on('click', '.single-add-favorite-btn', function(e){
+    e.preventDeafult();
     var favorite_songs = sessionStorage.getItem("favorite_songs");
     var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
     var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
