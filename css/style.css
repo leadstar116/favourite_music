@@ -51,6 +51,15 @@ body {
 #songsModal {
     overflow: scroll;
 }
+#songsModal .modal-header {
+    border: none;
+}
+#songsModal .modal-header .close{
+    padding: 0px;
+}
+#songsModal .category-name span {
+    text-transform: uppercase;
+}
 #songsModal .modal-content {
     background-image: url('/music-on-hold/music-tracks/assets/music-background-image.png');    
     background-position: center;
@@ -88,6 +97,7 @@ body {
 .category-name {
     color: #fff;
     font-size: 30px;
+    font-weight: 600;
     margin: 0px 10px 10px 10px;
 }
 
@@ -503,18 +513,18 @@ div.progress {
 }
 
 .player {
-    background: transparent url("../assets/spr.png") no-repeat scroll center top;
-    height: 162px;
+    background: #000000 url("../assets/spr3.png") no-repeat scroll center top;
+    height: 142px;
     position: relative;
-    width: 326px;
+    width: 400px;
     z-index: 2;
     margin: auto;
 }
 .player .title, .artist {
-    font-family: verdana;
-    left: 167px;
+    font-family: sans-serif;
+    left: 26px;
     position: absolute;
-
+    font-weight: normal;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -523,7 +533,7 @@ div.progress {
     color: #FFFFFF;
     font-size: 14px;
     font-weight: bold;
-    top: 23px;
+    top: 28px;
 }
 
 .player .artist {
@@ -555,9 +565,9 @@ div.progress {
 .player .controls {
     cursor: pointer;
     height: 23px;
-    left: 167px;
+    left: 230px;
     position: absolute;
-    top: 65px;
+    top: 25px;
     width: 138px;
 }
 .player .controls .play, .controls .pause, .controls .rew, .controls .fwd {
@@ -599,17 +609,18 @@ div.progress {
 }
 .player .volume {
     height: 11px;
-    left: 186px;
+    left: 228px;
     position: absolute;
-    top: 96px;
-    width: 112px;
+    top: 69px;
+    width: 160px;
 }
 .player .tracker {
     height: 15px;
-    left: 20px;
+    left: 31px;
     position: absolute;
-    top: 126px;
-    width: 285px;
+    top: 97px;
+    width: 330px;
+
 }
 .player .ui-slider-range {
     background: transparent url('/music-on-hold/music-tracks/assets/spr.png') no-repeat scroll 5px -222px;

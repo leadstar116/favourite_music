@@ -55,7 +55,6 @@
                 <div class="modal-content">
                     <div class="overlay-light">
                         <div class="modal-header">
-                            <h4 class="modal-title">Songs</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body songsBody">
