@@ -1,22 +1,45 @@
 body {
+    background-image: url('/music-on-hold/music-tracks/assets/background.jpg');    
+    background-position: center;
+    background-size: cover;    
+    color: #fff;
+}
+
+.header {
+    font-size: 15px;
     padding: 20px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.7);
 }
-
-.title {
-    color: #000;
-    font-size: 30px;
-    margin-bottom: 30px;
+.header a {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 5px 20px;
+    cursor: pointer;
 }
-
+.container {
+    margin-top: 100px;
+}
+::-webkit-scrollbar {    
+    width: 8px;
+    background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(104, 104, 104);
+    border-radius: 10px;    
+}
 .category-wrapper {
     padding: 10px;
     margin-bottom: 30px;
 }
 
 .category-wrapper:hover {
-    -webkit-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
-    -moz-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
-    box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
+    -webkit-box-shadow: 0px 0px 18px 4px rgba(255,255,255,0.71);
+    -moz-box-shadow: 0px 0px 18px 4px rgba(255,255,255,0.71);
+    box-shadow: 0px 0px 18px 4px rgba(255,255,255,0.71);
 }
 
 .category-album img {
@@ -27,9 +50,6 @@ body {
 }
 #songsModal {
     overflow: scroll;
-}
-#songsModal .modal-dialog {
-    max-width: 1400px;    
 }
 #songsModal .modal-content {
     background-image: url('/music-on-hold/music-tracks/assets/music-background-image.png');    
@@ -96,8 +116,9 @@ body {
 }
 
 .songs-section ul {
-    column-count: 2;
     text-decoration: none;
+    max-height: 200px;
+    overflow-y: scroll;
 }
 
 .songs-section ul li {
@@ -119,7 +140,7 @@ body {
     cursor: pointer;
 }
 
-.songs-section .selected {
+.selected {
     color: #f9e36b;
 }
 
@@ -138,8 +159,9 @@ body {
 }
 
 .favorite-section ul {
-    column-count: 2;
+    max-height: 200px;
     text-decoration: none;
+    overflow-y: scroll;
 }
 
 .favorite-section li {
@@ -151,7 +173,7 @@ body {
     cursor: pointer;
 }
 
-.favorite-section .remove-favorite {
+.remove-favorite {
     text-align: center;
     font-size: 20px;
 }
@@ -172,20 +194,25 @@ body {
     color: #fff;
 }
 
+#submitModal .close {
+    color: #fff;
+}
+
 #submitModal .submit-controls input{
     margin-bottom: 10px;
 }
 
-#favorite_songs_list_modal {
+#favorite_songs_list {
     padding: 0px 10px;
-    column-count: 2;
+    max-height: 200px;
+    overflow-y: scroll;
 }
 
-#favorite_songs_list_modal li{
+#favorite_songs_list li{
     list-style: none;
 }
 
-#favorite_songs_list_modal li:hover {
+#favorite_songs_list li:hover {
     color: #0f0;
     cursor: pointer;
 }
@@ -243,7 +270,22 @@ input:focus{
 .links a{
     margin-left: 4px;
 }
-
+@media only screen and (min-width: 768px) {
+    #songsModal {
+        overflow: hidden;
+    }
+    #submitModal {
+        left: 50%;
+        overflow: hidden;
+    }
+    #songsModal .modal-dialog {
+        margin: 1.75em 1em;
+        float: right;
+    }
+    #submitModal .modal-dialog {
+        margin: 1.75em 1em;
+    }
+}
 @media only screen and (max-width: 768px) {
     .shadow-box {
         box-shadow: none;
@@ -254,7 +296,8 @@ input:focus{
         box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
     }
     .songs-section ul {
-        column-count: 1;
+        max-height: 200px;
+        overflow-y: scroll;
     }
 
     .favorite-section {
@@ -263,15 +306,22 @@ input:focus{
         box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.71);
     }
     .favorite-section ul {
-        column-count: 1;
+        max-height: 200px;
     }
 
-    #favorite_songs_list_modal {
-        column-count: 1;
+    #favorite_songs_list {
+        max-height: 200px;
+        overflow-y: scroll;
     }
 
     .favorite-section {
         margin-top: 30px;
+    }
+    #songsModal {
+        padding: 10px 0px;
+    }
+    #songsModal .modal-dialog {
+        margin: 0px;
     }
 }
 
@@ -408,7 +458,7 @@ div.progress {
 }
 .single-add-favorite-btn {
     position: absolute;
-    right: 0px;
+    right: 10px;
     top: 0px;
     opacity: 0;
     transition: 0.3s;

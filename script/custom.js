@@ -1,3 +1,17 @@
+$(document).ready(function(){
+    var favorite_songs = sessionStorage.getItem("favorite_songs");  
+    var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
+    var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
+    if(favorite_songs != undefined) {
+        favorite_songs = favorite_songs.split(",");
+        favorite_songs_name = favorite_songs_name.split(",");
+        favorite_songs_url = favorite_songs_url.split(",");
+        for(var index = 0; index < favorite_songs.length; index++) {
+            $('#favorite_songs_list').append('<li><span attr-id="'+ favorite_songs[index] +'" audiourl="'+favorite_songs_url[index]+'">'+ favorite_songs_name[index] +'</span><a class="single-remove-favorite-btn" attr-id="'+favorite_songs[index]+'" attr-text="'+favorite_songs_name[index]+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
+        }
+    }
+});
+
 $(document).on('click', '.category-item', function(){    
     var formdata = new FormData();
     formdata.append("category_id", $(this).attr('attr-id'));
@@ -16,7 +30,7 @@ $(document).on('click', '.category-item', function(){
             if(typeof data.error === 'undefined')
             {             
                 var modal_data = `
-                    <div class="container">        
+                    <div class="">        
                     <div class="row">
                         <div class="col-md-12">
                             <div class="player mb-4">
@@ -36,7 +50,7 @@ $(document).on('click', '.category-item', function(){
                         </div>
                     </div>
                     <div class="row shadow-box">
-                        <div class="col-md-6 songs-section" ${(data['background_exist'])? `style='background-image: url("`+ data['album'] +`")'`:''}>
+                        <div class="col-md-12 songs-section" ${(data['background_exist'])? `style='background-image: url("`+ data['album'] +`")'`:''}>
                             <div class="overlay">
                                 <div class="category-name">
                                     <span>`+ data['category']['category_name'] +`</span>
@@ -46,8 +60,8 @@ $(document).on('click', '.category-item', function(){
                                         `;                                           
                                         $.each(data.songs, function(id, song) {                             
                                             modal_data +=`
-                                            <li attr-id="`+ id +`" style="position: relative;" audiourl="`+data['dir']+song['song_name'] +`" cover="`+ data['album'] +`" >
-                                                `+ song['song_name'].substring(0, song['song_name'].length-4) +`
+                                            <li style="position: relative;" >
+                                                <span attr-id="`+ id +`" audiourl="`+data['dir']+song['song_name'] +`" cover="`+ data['album'] +`">`+ song['song_name'].substring(0, song['song_name'].length-4) +`</span>
                                                 <a class="single-add-favorite-btn" attr-id="`+id +`" attr-text="`+ song['song_name'].substring(0, song['song_name'].length-4) +`" audiourl="`+ data['dir']+song['song_name'] +`"><i class="fa fa-plus" title="Add to favorite"></i></a>
                                             </li>
                                             `;
@@ -59,45 +73,15 @@ $(document).on('click', '.category-item', function(){
                                 </div>
                             </div>                
                         </div>
-                        <div class="col-md-6 favorite-section">
-                            <div class="overlay">
-                                <div class="favorite-name">
-                                    <span>My Favorites</span>
-                                </div>
-                                <div>
-                                    <ul id="favorite_songs_list" class="favorite-playlist">
-                                        
-                                    </ul>                    
-                                </div>
-                                <div class="remove-favorite">
-                                    <a id="remove-favorite-btn">- REMOVE FROM FAVORITES</a>
-                                </div>     
-                            </div>           
-                        </div>        
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 submit-mail">
-                            <input id="submit-mail-btn" class="btn btn-primary" type="submit" value="Submit">
-                        </div>
                     </div>
                 </div>
                 `;
                 $('#songsModal .modal-body').empty();
-                $('#songsModal .modal-body').append(modal_data);
-                var favorite_songs = sessionStorage.getItem("favorite_songs");  
-                var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
-                var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
-                if(favorite_songs != undefined) {
-                    favorite_songs = favorite_songs.split(",");
-                    favorite_songs_name = favorite_songs_name.split(",");
-                    favorite_songs_url = favorite_songs_url.split(",");
-                    for(var index = 0; index < favorite_songs.length; index++) {
-                        $('#favorite_songs_list').append('<li attr-id="'+ favorite_songs[index] +'" audiourl="'+favorite_songs_url[index]+'">'+ favorite_songs_name[index] +'<a class="single-remove-favorite-btn" attr-id="'+favorite_songs[index]+'" attr-text="'+favorite_songs_name[index]+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
-                        $('#favorite_songs_list_modal').append('<li attr-id="'+ favorite_songs[index] +'">'+ favorite_songs_name[index] +'</li>');
-                    }
-                }
-                $('#songsModal').modal('show');  
-                initAudio($('.playlist li:first-child'), false);
+                $('#songsModal .modal-body').append(modal_data);                
+                $('#songsModal').modal('show');                
+                $('#submitModal').modal('show');  
+                
+                initAudio($('.playlist li:first-child span'), false);
                 // set volume
                 song.volume = 0.8;
                 initializeTracker();                
@@ -166,16 +150,14 @@ $(document).on('click', '.add-favorite-player-btn', function(){
         favorite_songs.push($(this).attr('attr-id'));
         favorite_songs_name.push($(this).attr('attr-text'));
         favorite_songs_url.push($(this).attr('audiourl'));
-        $('#favorite_songs_list').append('<li attr-id="'+ $(this).attr('attr-id') +'" audiourl="'+$(this).attr('audiourl')+'">'+ $(this).attr('attr-text') +'<a class="single-remove-favorite-btn" attr-id="'+$(this).attr('attr-id')+'" attr-text="'+$(this).attr('attr-text')+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
-        $('#favorite_songs_list_modal').append('<li attr-id="'+ $(this).attr('attr-id') +'">'+ $(this).attr('attr-text') +'</li>');
+        $('#favorite_songs_list').append('<li><span attr-id="'+ $(this).attr('attr-id') +'" audiourl="'+$(this).attr('audiourl')+'">'+ $(this).attr('attr-text') +'</span><a class="single-remove-favorite-btn" attr-id="'+$(this).attr('attr-id')+'" attr-text="'+$(this).attr('attr-text')+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart-o');
     } else {
         favorite_songs.splice($.inArray($(this).attr('attr-id'), favorite_songs),1);
         favorite_songs_name.splice($.inArray($(this).attr('attr-text'), favorite_songs_name),1);
         favorite_songs_url.splice($.inArray($(this).attr('audiourl'), favorite_songs_url),1);
-        $('#favorite_songs_list li[attr-id="'+$(this).attr('attr-id')+'"]').remove();
-        $('#favorite_songs_list_modal li[attr-id="'+ $(this).attr('attr-id') +'"]').remove();
+        $('#favorite_songs_list li span[attr-id="'+$(this).attr('attr-id')+'"]').parent().remove();
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart-o');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart');
     }      
@@ -185,18 +167,18 @@ $(document).on('click', '.add-favorite-player-btn', function(){
     sessionStorage.setItem("favorite_songs_url", favorite_songs_url);   
 });
 
-$(document).on('click', '#songs_list li', function(){    
-    $('#songs_list li').removeClass('selected');    
+$(document).on('click', '#songs_list li span', function(){    
+    $('#songs_list li span').removeClass('selected');    
     $(this).addClass('selected');
 });
 
-$(document).on('click', '#favorite_songs_list li', function(){       
-    $('#favorite_songs_list li').removeClass('selected');    
+$(document).on('click', '#favorite_songs_list li span', function(){       
+    $('#favorite_songs_list li span').removeClass('selected');    
     $(this).addClass('selected'); 
 });
 
-$(document).on('click', '.single-add-favorite-btn', function(e){
-    e.preventDeafult();
+
+$(document).on('click', '.single-add-favorite-btn', function(){    
     var favorite_songs = sessionStorage.getItem("favorite_songs");
     var favorite_songs_name = sessionStorage.getItem("favorite_songs_name");            
     var favorite_songs_url = sessionStorage.getItem("favorite_songs_url");            
@@ -220,8 +202,7 @@ $(document).on('click', '.single-add-favorite-btn', function(e){
         favorite_songs_name.push($(this).attr('attr-text'));
         favorite_songs_url.push($(this).attr('audiourl'));
         console.log($(this).attr('audiourl'));
-        $('#favorite_songs_list').append('<li attr-id="'+ $(this).attr('attr-id') +'" audiourl="'+$(this).attr('audiourl')+'">'+ $(this).attr('attr-text') +'<a class="single-remove-favorite-btn" attr-id="'+$(this).attr('attr-id')+'" attr-text="'+$(this).attr('attr-text')+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
-        $('#favorite_songs_list_modal').append('<li attr-id="'+ $(this).attr('attr-id') +'">'+ $(this).attr('attr-text') +'</li>');
+        $('#favorite_songs_list').append('<li><span attr-id="'+ $(this).attr('attr-id') +'" audiourl="'+$(this).attr('audiourl')+'">'+ $(this).attr('attr-text') +'</span><a class="single-remove-favorite-btn" attr-id="'+$(this).attr('attr-id')+'" attr-text="'+$(this).attr('attr-text')+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart-o');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart');
     }        
@@ -253,8 +234,7 @@ $(document).on('click', '.single-remove-favorite-btn', function(){
         favorite_songs.splice($.inArray($(this).attr('attr-id'), favorite_songs),1);
         favorite_songs_name.splice($.inArray($(this).attr('attr-text'), favorite_songs_name),1);
         favorite_songs_url.splice($.inArray($(this).attr('attr-text'), favorite_songs_url),1);
-        $('#favorite_songs_list li[attr-id="'+$(this).attr('attr-id')+'"]').remove();
-        $('#favorite_songs_list_modal li[attr-id="'+ $(this).attr('attr-id') +'"]').remove();
+        $('#favorite_songs_list li span[attr-id="'+$(this).attr('attr-id')+'"]').parent().remove();
         if($('.player a[attr-id="'+$(this).attr('attr-id')+'"]').length) {
             $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart-o');
             $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart');
