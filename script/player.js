@@ -34,8 +34,7 @@
         } else {
             $('.player .title').append('<a attr-id="'+elem.attr('attr-id')+'" attr-text="'+ elem.text() +'" audiourl="'+url+'" class="add-favorite-player-btn ml-1"><i class="fa fa-heart" style="color: #f00;"></i></a>');
         }
-        $('.player .artist').text(artist);
-        $('.player .cover').css('background-image','url("'+cover+'")');;
+        $('.player .artist').text(artist);        
 
         song = null;
         song = new Audio(url);

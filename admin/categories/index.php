@@ -110,6 +110,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/includes/footer.php");
 ?>
 <script>
     $(document).ready(function() {
-        $('.use-dataTable').dataTable();
+        $('.use-dataTable').dataTable({
+            "pageLength": 100
+        });
     });
 </script> 

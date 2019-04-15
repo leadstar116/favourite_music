@@ -56,7 +56,7 @@ $songs = getSongsByCategoryId($category_id);
                     <div>
                         <input id="category_id" style="display:none;" value="<?= $category_id ?>">
                         <input id="category_name" style="display:none;" value="<?= $category['category_name'] ?>">
-                        <input type="file" id="uploadBtn" class="btn btn-primary btn-add-image" style="display: none;">
+                        <input type="file" id="uploadBtn" class="btn btn-primary btn-add-image" style="display: none;" multiple>
                         <input type="button" id="changeCategoryNameBtn" class="btn btn-primary pull-right ml-2" value="Change Category Name">
                         <label for="uploadBtn" class="btn btn-primary pull-right">Add New Song</label>   
                         <div class="progress pull-right">
@@ -124,7 +124,7 @@ $songs = getSongsByCategoryId($category_id);
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure to remove a song?</p>
+                    <p></p>
                 </div>
                 <input id="song_id" style="display:none;" >
                 <input id="song_name" style="display:none;" >                        
@@ -165,6 +165,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] . $subdir . "/includes/footer.php");
 ?>
 <script>
     $(document).ready(function() {
-        $('.use-dataTable').dataTable();
+        $('.use-dataTable').dataTable({
+            "pageLength": 50
+        });
     });
 </script> 

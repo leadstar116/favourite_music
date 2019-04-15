@@ -103,7 +103,7 @@ class Songs{
                 $qry->bind_result($id);
                 if($qry->fetch()) {
                     if($id) {
-                        $result['error'] = 'Song is already exist in this category';
+                        $result['error'] = 'Song already exists in this category!';
                         $qry->close();
                         return $result;
                     }

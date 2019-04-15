@@ -40,8 +40,7 @@ $(document).on('click', '.category-item', function(){
                             <div class="player mb-4">
                                 <div class="pl"></div>
                                 <div class="title"></div>                    
-                                <div class="artist"></div>
-                                <div class="cover"></div>
+                                <div class="artist"></div>                                
                                 <div class="controls">
                                     <div class="play"></div>
                                     <div class="pause"></div>
@@ -400,6 +399,7 @@ var modalConfirm = function (callback) {
     $(".song-remove-btn").on("click", function () {
         $("#song_id").val($(this).attr('attr-id'));
         $("#song_name").val($(this).attr('attr-name'));
+        $("#removeModal p").text("Are you sure you want to remove "+$(this).attr('attr-name')+"?");
         $("#removeModal").modal('show');
     });
 
