@@ -126,6 +126,45 @@ if($_POST['type'] == 'remove_song') {
             $data = array('success' => 'Image was successfully changed');  
         }
     }
+}  else if($_POST['type'] == 'change_background_image') {
+    if($_FILES["file"]["error"] == UPLOAD_ERR_OK && $_FILES["file"]['name'] != '')
+    {          
+        $error = false;
+        $files = array();
+        $category_name = $_POST['category_name'];
+        
+        $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/upload/temp/';
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/upload')) {
+            mkdir($_SERVER['DOCUMENT_ROOT'].'/upload', 0777, true);
+        }
+        if (!file_exists($uploaddir)) {
+            mkdir($uploaddir, 0777, true);
+        }
+
+        foreach($_FILES as $file)
+        {
+            if(move_uploaded_file($file['tmp_name'], $uploaddir . basename('temp.png')))
+            {
+                $uploaddir = $_SERVER['DOCUMENT_ROOT'].$subdir.'/img/music-samples/';
+                if (!file_exists($_SERVER['DOCUMENT_ROOT'].$subdir.'/img')) {
+                    mkdir($_SERVER['DOCUMENT_ROOT'].$subdir.'/img', 0777, true);
+                }
+                if (!file_exists($uploaddir)) {
+                    mkdir($uploaddir, 0777, true);
+                }
+                rename($_SERVER['DOCUMENT_ROOT'] . '/upload/temp/temp.png', $uploaddir . basename($category_name.'_back.png'));
+            }
+            else
+            {
+                $error = true;
+            }
+        }
+        if($error) {
+            $data = array('error' => 'There was an error uploading your files');    
+        } else {
+            $data = array('success' => 'Image was successfully changed');  
+        }
+    }
 } else if($_POST['type'] == 'add_category') {
     $category_name = $_POST['category_name'];
     $category_image_flag = $_POST['category_image_flag'];

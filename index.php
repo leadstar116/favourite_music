@@ -33,7 +33,7 @@
                             </a>
                         </div>
                         <div class="category-info">
-                            <a class="category-item" attr-id="<?= $id ?>"><?= $category['category_name'] ?></a>
+                            <!-- <a class="category-item" attr-id="<?= $id ?>"><?= $category['category_name'] ?></a> -->
                             <div class="category-detailed-info row">
                                 <span class="col-6"><?= $category['category_popularity'] ?> <i class="fa fa-heart" style="color: #f00;"></i></span>
                                 <span class="col-6"><?= $category['songs_count'] ?> <i class="fa fa-music"></i></span>
@@ -53,13 +53,15 @@
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Songs</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        
-                    </div>                              
+                    <div class="overlay-light">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Songs</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            
+                        </div>    
+                    </div>                          
                 </div>
             </div>
         </div>

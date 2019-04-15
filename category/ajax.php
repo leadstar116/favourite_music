@@ -14,7 +14,7 @@ if (isset($_POST)) {
         $category_id = $_POST['category_id'];        
         $songs = getSongsByCategoryId($category_id);
         $category = getCategoryById($category_id);
-        $album = $subdir.'/img/music-samples/'. $category['category_name'] .'.png'; 
+        $album = $subdir.'/img/music-samples/'. $category['category_name'] .'_back.png'; 
         $data['songs'] = $songs;
         $data['category'] = $category;
         $data['album'] = $album;

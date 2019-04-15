@@ -67,11 +67,19 @@ $songs = getSongsByCategoryId($category_id);
                 </div>
                 <div class="row">                    
                     <div class="col-sm-12">
-                        <div class="mb-3 pb-3 border-bottom">
-                            <input type="file" id="albumChangeUploadBtn" name="album" class="btn btn-primary btn-add-image" style="display: none;">                    
-                            <label for="albumChangeUploadBtn" class="btn btn-primary mr-3">Change Image</label>                                                   
-                            <img id="imageChangeSrc" style="width: 200px; height: 200px;" src="<?= $subdir.'/img/music-samples/'.$category['category_name'].'.png'; ?>"/> 
-                            <a style="font-style: italic; color: grey;">Image size should be 300*300px</a>
+                        <div class="mb-3 pb-3 border-bottom row">
+                            <div class="col-6">
+                                <input type="file" id="albumChangeUploadBtn" name="album" class="btn btn-primary btn-add-image" style="display: none;">                    
+                                <label for="albumChangeUploadBtn" class="btn btn-primary mr-3">Change Image</label>                                                   
+                                <img id="imageChangeSrc" style="width: 200px; height: 200px;" src="<?= $subdir.'/img/music-samples/'.$category['category_name'].'.png'; ?>"/> 
+                                <a style="font-style: italic; color: grey;">Image size should be 300*300px</a>
+                            </div>
+                            <div class="col-6">
+                                <input type="file" id="backgroundChangeUploadBtn" name="album" class="btn btn-primary btn-add-image" style="display: none;">                    
+                                <label for="backgroundChangeUploadBtn" class="btn btn-primary mr-3">Change Background Image</label>                                                   
+                                <img id="backgroundImg" style="width: 200px; height: 200px;" src="<?= $subdir.'/img/music-samples/'.$category['category_name'].'_back.png'; ?>"/> 
+                                <a style="font-style: italic; color: grey;">Image size should be 300*300px</a>
+                            </div>
                         </div>
                         <table class="table use-dataTable category-table">
                             <thead class="thead-dark">

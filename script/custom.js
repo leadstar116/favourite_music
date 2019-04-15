@@ -50,7 +50,7 @@ $(document).on('click', '.category-item', function(){
                         </div>
                     </div>
                     <div class="row shadow-box">
-                        <div class="col-md-12 songs-section" ${(data['background_exist'])? `style='background-image: url("`+ data['album'] +`")'`:''}>
+                        <div class="col-md-12 songs-section" }>
                             <div class="overlay">
                                 <div class="category-name">
                                     <span>`+ data['category']['category_name'] +`</span>
@@ -76,6 +76,11 @@ $(document).on('click', '.category-item', function(){
                     </div>
                 </div>
                 `;
+                if(data['background_exist']){
+                    $('#songsModal .modal-content').css('background-image', 'url("'+ data['album'] +'")');
+                } else {
+                    $('#songsModal .modal-content').css('background-image', 'url("/music-on-hold/music-tracks/assets/music-background-image.png")');
+                }
                 $('#songsModal .modal-body').empty();
                 $('#songsModal .modal-body').append(modal_data);                
                 $('#songsModal').modal('show');                
@@ -459,6 +464,25 @@ $("#albumChangeUploadBtn").on('change', function (event) {
         formdata.append("category_id", $("#category_id").val());
         formdata.append("category_name", $("#category_name").val());
         formdata.append("type", 'change_album_image');
+        
+        var ajax = new XMLHttpRequest();     
+        ajax.open("POST", "ajax.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP        
+        ajax.send(formdata);     
+    }
+    return false;
+});
+
+$("#backgroundChangeUploadBtn").on('change', function (event) {
+    if($(this).prop('files').length > 0)
+    { 
+        var file = $(this).prop('files')[0];
+        $("#backgroundImg").attr("src", URL.createObjectURL($(this).prop('files')[0]));   
+        
+        var formdata = new FormData();
+        formdata.append("file", file);
+        formdata.append("category_id", $("#category_id").val());
+        formdata.append("category_name", $("#category_name").val());
+        formdata.append("type", 'change_background_image');
         
         var ajax = new XMLHttpRequest();     
         ajax.open("POST", "ajax.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP        
