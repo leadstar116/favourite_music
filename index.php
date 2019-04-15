@@ -49,7 +49,7 @@
     <!-- main category section end -->
     <!-- songs modal -->
     <div class="row">
-        <div id="songsModal" class="modal fade col-sm-6" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div id="songsModal" class="modal fade col-md-6" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -58,7 +58,7 @@
                             <h4 class="modal-title">Songs</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body songsBody">
                             
                         </div>    
                     </div>                          
@@ -67,7 +67,7 @@
         </div>
         <!-- songs modal end -->
         <!-- Submit Modal -->
-        <div id="submitModal" class="modal fade col-sm-6" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div id="submitModal" class="modal fade col-md-6" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">

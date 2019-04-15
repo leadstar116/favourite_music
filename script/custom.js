@@ -9,7 +9,7 @@ $(document).ready(function(){
         for(var index = 0; index < favorite_songs.length; index++) {
             $('#favorite_songs_list').append('<li><span attr-id="'+ favorite_songs[index] +'" audiourl="'+favorite_songs_url[index]+'">'+ favorite_songs_name[index] +'</span><a class="single-remove-favorite-btn" attr-id="'+favorite_songs[index]+'" attr-text="'+favorite_songs_name[index]+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
         }
-    }
+    }    
 });
 
 $(document).on('click', '.category-item', function(){    
@@ -29,10 +29,14 @@ $(document).on('click', '.category-item', function(){
         {
             if(typeof data.error === 'undefined')
             {             
+                if($(window).width() < 768) {
+                    $('#submitModal').insertAfter("#songsModal");
+                    $('#submitModal').removeClass("col-sm-6");
+                }   
                 var modal_data = `
                     <div class="">        
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="padding: 0px;">
                             <div class="player mb-4">
                                 <div class="pl"></div>
                                 <div class="title"></div>                    
@@ -82,14 +86,18 @@ $(document).on('click', '.category-item', function(){
                     $('#songsModal .modal-content').css('background-image', 'url("/music-on-hold/music-tracks/assets/music-background-image.png")');
                 }
                 $('#songsModal .modal-body').empty();
-                $('#songsModal .modal-body').append(modal_data);                
+                $('#songsModal .modal-body').append(modal_data);     
+                if($(window).width() < 768) {                 
+                    $('#submitModal').appendTo(".songsBody");                    
+                    $('#submitModal').removeClass("col-sm-6");
+                }           
                 $('#songsModal').modal('show');                
                 $('#submitModal').modal('show');  
                 
                 initAudio($('.playlist li:first-child span'), false);
                 // set volume
                 song.volume = 0.8;
-                initializeTracker();                
+                initializeTracker();                      
             }
             else
             {
@@ -104,6 +112,11 @@ $(document).on('click', '.category-item', function(){
             // STOP LOADING SPINNER
         }
     });   
+});
+$('#songsModal').on('shown.bs.modal', function() { 
+    if($(window).width() < 768) {                        
+        $('#submitModal').css('top', $('#songsModal .modal-content').height()+'px');
+    }
 });
 /*
 $(document).on('click', '#add-favorite-btn', function(){
@@ -542,3 +555,13 @@ removeModalConfirm(function (confirm) {
         });   
     }
 });    
+
+$(window).resize(function() {
+    if($(window).width() < 768) {
+        $('#submitModal').appendTo(".songsBody");
+        $('#submitModal').css('top', $('#songsModal .modal-content').height()+'px');        
+    } else {
+        $('#submitModal').insertAfter("#songsModal");        
+        $('#submitModal').css('top', '0px');
+    }
+});

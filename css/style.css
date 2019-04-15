@@ -333,6 +333,14 @@ input:focus{
     #songsModal .modal-dialog {
         margin: 0px;
     }
+    #submitModal {
+        padding: 0px;
+        top: 620px;
+        height: 750px;
+    }
+    #submitModal .modal-dialog {
+        margin: 0px;
+    }
 }
 
 /* dashboard css */
