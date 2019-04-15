@@ -533,6 +533,7 @@ div.progress {
     color: #FFFFFF;
     font-size: 14px;
     font-weight: bold;
+    max-width: 200px;
     top: 28px;
 }
 
