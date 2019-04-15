@@ -17,44 +17,45 @@ if($_POST['type'] == 'remove_song') {
     unlink($filename);
     deleteSongById($song_id);
 } else if($_POST['type'] == 'add_new_song') {
-    if($_FILES["file"]["error"] == UPLOAD_ERR_OK && $_FILES["file"]['name'] != '')
+    if($_FILES["file0"]["error"] == UPLOAD_ERR_OK && $_FILES["file0"]['name'] != '')
     {  
         $category_id = $_POST['category_id'];
         $category_name = $_POST['category_name'];
+        $file_count = $_POST['file_count'];
         $error = false;
-        $files = array();
         
         $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/audio_bin/' . $category_name. '/';
-        $filename = $_FILES["file"]['name'];
-        $check_result = checkSongExistInCategory($category_id, $filename);
-        if($check_result['success']) {
-            foreach($_FILES as $file)
-            {
+
+        foreach($_FILES as $file)
+        {
+            $filename = $file['name'];
+            $check_result = checkSongExistInCategory($category_id, $filename);
+            if($check_result['success']) {
                 $filename = $file['name'];
                 if(move_uploaded_file($file['tmp_name'], $uploaddir . basename($file['name'])))
                 {
-                    $files[] = $uploaddir .$file['name'];
+                    
                 }
                 else
                 {
                     $error = true;
                 }
-            }
-            if($error) {
-                $data = array('error' => 'There was an error uploading your files');    
-            }
-            if(!$error) {
-                //Handle database:        
-                $result = addNewSongToCategory($category_id, $filename);
-                if($result['success']) {
-                    $data = array('success' => 'Song was successfully added');    
-                } else {
-                    $data = array('error' => $result['error']);    
+                if($error) {
+                    $data = array('error' => 'There was an error uploading your files');    
                 }
-            }
-        } else {
-            $data = array('error' => $check_result['error']);    
-        }    
+                if(!$error) {
+                    //Handle database:        
+                    $result = addNewSongToCategory($category_id, $filename);
+                    if($result['success']) {
+                        $data = array('success' => 'Song was successfully added');    
+                    } else {
+                        $data = array('error' => $result['error']);    
+                    }
+                }
+            } else {
+                $data = array('error' => $check_result['error']);    
+            }  
+        }  
     }
 } else if($_POST['type'] == 'upload_temp_image') {
     if($_FILES["file"]["error"] == UPLOAD_ERR_OK && $_FILES["file"]['name'] != '')

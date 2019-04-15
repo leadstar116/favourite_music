@@ -360,8 +360,11 @@ $("#uploadBtn").on('change', function (event) {
     $("div.progress").show();
     if($(this).prop('files').length > 0)
     {
-        var file = $(this).prop('files')[0];
-        formdata.append("file", file);
+        for(var index = 0; index < $(this).prop('files').length; index+=1){
+            var file = $(this).prop('files')[index];
+            formdata.append("file"+index, file);
+        }
+        formdata.append("file_count", $(this).prop('files').length);
         formdata.append("category_id", $("#category_id").val());
         formdata.append("category_name", $('#category_name').val());
         formdata.append("type", 'add_new_song');
@@ -373,8 +376,13 @@ $("#uploadBtn").on('change', function (event) {
             if (this.readyState == 4) { // If the HTTP request has completed 
                 if (this.status == 200) { // If the HTTP response code is 200 (e.g. successful)
                     var response = this.responseText; // Retrieve the response text    
-                    alert(response);
-                    location.reload();      
+                    response = JSON.parse(response);
+                    if(response["success"] != undefined) {
+                        alert(response["success"]);
+                        location.reload();      
+                    } else {
+                        alert(response["error"]);
+                    }
                 };
             };
         };
