@@ -73,6 +73,7 @@ if (isset($_POST)) {
         $headers = 'From: info@easyonhold.com' . "\r\n";
         $headers .= 'Bcc: production@easyonhold.com, jen.fisher@easyonhold.com, tim.brown@easyonhold.com,julie.cook@easyonhold.com' . "\r\n";
 
+        $body = wordwrap($body,70);
         mail($to, $subject, $body, $headers);
 
         $data = array('success' => 'Successfully Sent');

@@ -318,6 +318,7 @@ $(document).on('click', '#modal-btn-submit', function(){
     }
     var formdata = new FormData();
     formdata.append("name", $("#submit_name").val());
+    formdata.append("type", 'send_email');
     formdata.append("company", $("#submit_company").val());
     formdata.append("email", $("#submit_email").val());
     formdata.append("phone", $("#submit_phone").val());
@@ -325,7 +326,7 @@ $(document).on('click', '#modal-btn-submit', function(){
     formdata.append("favorite_songs_id", favorite_songs);
     formdata.append("favorite_songs_name", favorite_songs_name);
     $.ajax({
-        url: 'ajax.php',
+        url: 'category/ajax.php',
         type: 'POST',
         data: formdata,
         cache: false,
