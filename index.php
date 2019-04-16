@@ -21,11 +21,22 @@
     <!-- title end -->
     <!-- main category section     -->
     <div class="container">
-        <div class="row">
+        <div class="row mb-3">
+            <div class="dropdown dropdown-dark col-12">
+                <div class="pull-right">
+                    <span>Sort by: </span>
+                    <select name="two" class="dropdown-select category-sort-option">                    
+                        <option value="popularity">Most popular</option>
+                        <option value="name">A-Z</option>                        
+                    </select>
+                </div>
+            </div>
+        </div>        
+        <div class="row category-section">            
         <?php 
             foreach($categories as $id => $category) {
             ?>
-                <div class="col-6 col-md-4 col-lg-2" id="category-<?= $id ?>">
+                <div class="col-6 col-md-4 col-lg-2 category-div" id="category-<?= $id ?>" data-name="<?= $category['category_name'] ?>" data-popularity="<?= $category['category_popularity'] ?>">
                     <div class="category-wrapper">
                         <div class="category-album">
                             <a class="category-item" attr-id="<?= $id ?>">

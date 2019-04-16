@@ -574,3 +574,15 @@ $(window).resize(function() {
         $('#submitModal').css('top', '0px');
     }
 });
+
+$('.category-sort-option').change(function(){
+    var sortOption = $(this).val();
+    var divList = $(".category-div");    
+    divList.sort(function(a, b){     
+        if(sortOption == "name") {            
+            return String.prototype.localeCompare.call($(a).data('name').toString().toLowerCase(), $(b).data('name').toString().toLowerCase());
+        }   
+        return $(b).data(sortOption)-$(a).data(sortOption)
+    });
+    $(".category-section").html(divList);
+});
