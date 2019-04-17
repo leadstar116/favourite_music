@@ -35,12 +35,13 @@ if (isset($_POST)) {
             addDownloadedCountOfSong($id);
         }
 
-        //$to = $email . ",production@easyonhold.com";
-        $to = "supremedev116@gmail.com, aromaticconnect@gmail.com";
+        $favorite = getFavoriteSongsWithCategoryName($favorite_songs_id);
+
+        $to = $email . ",production@easyonhold.com";
         $subject = "Your Easy On Hold Jukebox Confirmation";
         $body = "Thank you, " . $name . ", for selecting your favorite music from our jukebox!" . "\n";
         $body .= "\r\n";
-        $body .= "Your favorites: "  . $fav . "\n";
+        $body .= "Your favorites: "  . $favorite . "\n";
         $body .= "\r\n";
         $body .= "Notes: " . $notes . "\n";
         $body .= "\r\n";

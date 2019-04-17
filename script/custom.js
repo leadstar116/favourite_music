@@ -218,7 +218,6 @@ $(document).on('click', '.single-add-favorite-btn', function(){
         favorite_songs.push($(this).attr('attr-id'));
         favorite_songs_name.push($(this).attr('attr-text'));
         favorite_songs_url.push($(this).attr('audiourl'));
-        console.log($(this).attr('audiourl'));
         $('#favorite_songs_list').append('<li><span attr-id="'+ $(this).attr('attr-id') +'" audiourl="'+$(this).attr('audiourl')+'">'+ $(this).attr('attr-text') +'</span><a class="single-remove-favorite-btn" attr-id="'+$(this).attr('attr-id')+'" attr-text="'+$(this).attr('attr-text')+'"><i class="fa fa-minus" title="Remove from favorites"></i></a></li>');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').removeClass('fa-heart-o');
         $('.player a[attr-id="'+$(this).attr('attr-id')+'"] i').addClass('fa-heart');

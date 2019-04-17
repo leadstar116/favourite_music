@@ -62,6 +62,27 @@ function changeCategoryName($category_id, $category_name){
     }
 }
 
+function getFavoriteSongsWithCategoryName($songs_id_array){
+    global $db;
+    $favorite = [];
+    $qry = $db->prepare("select s.song_name, c.category_name FROM songs s LEFT JOIN categories c ON s.category_id = c.id WHERE s.id IN (". $songs_id_array .");");
+    if ($qry === false) {
+        trigger_error(mysqli_error($db->conn));
+    } else {
+        if ($qry->execute()) {
+            $qry->store_result();
+            $qry->bind_result($song_name, $category_name);
+            while($qry->fetch()) {
+                $favorite[] = $song_name.' - '.$category_name;
+            }
+        } else {
+            trigger_error(mysqli_error($db->conn));
+        }
+    }
+    $qry->close();
+    return implode(', ', $favorite);
+    
+}
 function getSongsByCategoryId($category_id) {
     global $songs_db;
     return $songs_db->getSongsByCategoryId($category_id);
