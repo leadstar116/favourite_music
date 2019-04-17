@@ -1,17 +1,21 @@
 body {
-    background-image   : url('/music-on-hold/music-tracks/assets/background.png');
+    background-image: url('/music-on-hold/music-tracks/assets/background.jpg');    
     background-position: center;
     background-size    : cover;
     color              : #fff;
 }
 
+@media screen and (max-width: 990px){
+	body{background: #000000; color: #fff;}
+}
+
 .header {
-    font-size : 15px;
-    padding   : 20px;
-    position  : fixed;
-    top       : 0px;
-    width     : 100%;
-    z-index   : 99;
+    font-size: 15px;
+    padding: 20px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 99;
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -24,6 +28,7 @@ body {
 
 .container {
     margin-top: 100px;
+	margin-bottom: 100px;
 }
 
 ::-webkit-scrollbar {
@@ -129,16 +134,16 @@ body {
     z-index         : 1;
     padding         : 10px;
 }
-
-.overlay {
+#songsModal .overlay {
     background-color: rgba(0, 0, 0, 0.5);
-    top             : 0;
-    left            : 0;
-    width           : 100%;
-    height          : 100%;
-    position        : relative;
-    z-index         : 1;
-    padding         : 10px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+	opacity: 1;
 }
 
 .songs-section {
@@ -175,6 +180,7 @@ body {
 
 .selected {
     color: #f9e36b;
+	background: none;
 }
 
 .favorite-section {
@@ -562,13 +568,21 @@ div.progress {
     margin    : auto;
 }
 
-.player .title,
-.artist {
-    font-family        : sans-serif;
-    left               : 26px;
-    position           : absolute;
-    font-weight        : normal;
-    -moz-user-select   : none;
+/**disallow background on small mobile devices**/
+@media (max-width: 480px) {
+	.player {background: #000000; background-image: none; width: 360px;}
+	.player .controls {margin-left: -40px;}
+	.player .volume {margin-left: -40px;}
+	.player .tracker {margin-left: -12px;}
+	.player .title {margin-top: 10px; padding-right: 20px;}
+}	
+	
+.player .title, .artist {
+    font-family: sans-serif;
+    left: 26px;
+    position: absolute;
+    font-weight: normal;
+    -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select    : none;
 }
@@ -577,8 +591,10 @@ div.progress {
     color      : #FFFFFF;
     font-size  : 14px;
     font-weight: bold;
-    max-width  : 200px;
-    top        : 28px;
+    max-width: 200px;
+	position: absolute;
+    top: 11px;
+	left: 19px;
 }
 
 .player .artist {

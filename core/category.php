@@ -77,7 +77,7 @@ class Category{
                 $qry->bind_result($id);
                 if($qry->fetch()) {
                     if($id) {
-                        $result['error'] = 'This category is already exist';
+                        $result['error'] = 'This category already exists';
                         $qry->close();
                         return $result;
                     }

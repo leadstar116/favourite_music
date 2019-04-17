@@ -62,7 +62,7 @@ class Users{
                 $qry->bind_result($id);
                 if($qry->fetch()) {
                     if($id) {
-                        $result['error'] = 'User already exist';
+                        $result['error'] = 'User already exists';
                         $result['id'] = $id;
                         $qry->close();
                         return $result;

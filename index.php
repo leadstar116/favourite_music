@@ -1,4 +1,24 @@
-<?php 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music On Hold | Phone On Hold Music Tracks</title>
+    <meta name="description" content="Quick and easy music on hold to fit your business. Listen to the best from over 100,000 hollywood quality tracks.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+ <!---removed the php to the links includes due to conflicts-->
+ 
+ <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0084/2287.js" async="async"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" rel="stylesheet"> 
+
+<link href="/style.css" rel="stylesheet" type="text/css" media="screen"> 
+ 
+ 
+ 
+ 
+    
+		<?php 
     $debugging = true;
     if($debugging) {
         ini_set('display_errors', 1);
@@ -14,6 +34,17 @@
 ?>
 
 <body>
+<span class="color-red">
+    <!--color theme controlled by body tag-->
+
+        <!--the main div-->
+        <?php include '../../includes/topnav.php'; ?>
+            <!--TOP NAVIGATION-->
+            <?php include '../../includes/main-header-music-on-hold.php'; ?>
+                <!--LOGO Social MAIN NAVIGATION-->
+                </header>
+</span>
+				<section class="banner-musictracks"> <section class="content-musictracks">  <h2>Find your style.</h2><h5 class="tight">The right music for your messages on hold.</h5> </section> </section>
     <!-- title -->
     <div class="header text-center">
         <a id="submit-mail-btn">REVIEW & SUBMIT YOUR FAVORITES</a>
